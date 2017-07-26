@@ -1,37 +1,43 @@
 <?php
-if($uid){$usuario = $Service->get_usuario($uid);$usuario = $usuario[0];}
+if($uid){
+  $usuario = $Service->get_usuario($uid);$usuario = $usuario[0];
+}
 else{header("Location: http://localhost/mobkii/vsv/index.php");}
  ?>
 <div class="row justify-content-between">
   <div class="col-12 profile-info py-md-5 px-md-5 py-1 px-1">
-    <form>
+    <form id="frmUsuario">
         <div class="row">
-          <div class="col-6 form-group">
+          <div class="col-12 form-group">
             <label for="nombre">Nombre</label>
-            <input type="text" name="nombre" value="" class="form-control">
+            <input type="text" name="nombre" value="<?php echo $usuario['nombre']; ?>" class="form-control isRequired">
           </div>
           <div class="col-6 form-group">
             <label for="apellido">Apellido</label>
-            <input type="text" name="apellido" value="" class="form-control">
+            <input type="text" name="apellido" value="<?php echo $usuario['apellido']; ?>" class="form-control isRequired">
           </div>
           <div class="col-6 form-group">
             <label for="correo">Correo</label>
-            <input type="text" name="correo" value="" class="form-control">
+            <input type="email" name="correo" value="<?php echo $usuario['correo']; ?>" class="form-control isRequired">
           </div>
           <div class="col-6 form-group">
             <label for="telefono">Teléfono</label>
-            <input type="text" name="telefono" value="" class="form-control">
+            <input type="text" name="telefono" value="<?php echo $usuario['telefono']; ?>" class="form-control isRequired">
+          </div>
+          <div class="col-6 form-group">
+            <label for="celular">Celular</label>
+            <input type="text" name="celular" value="<?php echo $usuario['celular']; ?>" class="form-control isRequired">
           </div>
           <div class="col-6 form-group">
             <label for="contrasena">Contraseña</label>
-            <input type="text" name="contrasena" value="" class="form-control">
+            <input type="password" name="contrasena" value="<?php echo $usuario['contrasena']; ?>" class="form-control isRequired">
           </div>
           <div class="col-6 form-group">
             <label for="confirmar_contrasena">Confirmar contraseña</label>
-            <input type="text" name="confirmar_contrasena" value="" class="form-control">
+            <input type="password" name="confirmar_contrasena" value="<?php echo $usuario['contrasena']; ?>" class="form-control isRequired">
           </div>
           <div class="col-6 offset-3">
-            <button type="button" name="button" class="btn btn-primary bt fwidth">Guardar</button>
+            <a  class="btn btn-primary bt fwidth onUpdate cw">Guardar</a>
           </div>
         </div>
 <!-- <div class="row">
@@ -87,6 +93,7 @@ else{header("Location: http://localhost/mobkii/vsv/index.php");}
     <button type="button" name="button" class="btn btn-primary bs fwidth">Guardar</button>
   </div>
 </div> -->
+      <input type="hidden" name="id" value="<?php echo $uid; ?>">
     </form>
   </div>
   <div class="col-12 tabla-info mt-5 p-5 pt-0">

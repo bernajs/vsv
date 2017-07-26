@@ -110,5 +110,30 @@ case "favorito":
     $result["status"] = 202;
 echo json_encode($result);
 break;
+case "update":
+    $data = $_POST['data'];
+    $isCorreo = false;
+    $isTelefono = false;
+    $isCelular = false;
+    if($obj->isEmail($data['id'], $data['correo'])) {$isCorreo = true;$result['correo']=true;}
+    if($obj->isTelefono($data['telefono'], $data['id'])) {$isTelefono = true;$result['telefono']=true;}
+    if($obj->isCelular($data['celular'], $data['id'])) {$isCelular = true;$result['celular']=true;}
+    if(!$isCorreo && !$isCelular && !$isTelefono){
+    $obj->set_correo($data['correo'])->
+    set_id($data['id'])->
+    set_nombre($data['nombre'])->
+    set_apellido($data['apellido'])->
+    set_contrasena($data['contrasena'])->
+    set_telefono($data['telefono'])->
+    set_celular($data['celular'])->
+    set_modified_at_at(date("Y-m-d H:i:s"))->
+    set_status(1)->
+    db('update');
+    $result['status'] = 202;
+}else{
+    $result['status'] = 404;
+}
+echo json_encode($result);
+break;
 }
 ?>

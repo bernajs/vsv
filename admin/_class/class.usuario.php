@@ -50,7 +50,7 @@ class Usuario extends Helper {
                 correo='".$this->correo."',
                 telefono='".$this->telefono."',
                 celular='".$this->celular."',
-                contraesena='".$this->contraesena."',
+                contrasena='".$this->contrasena."',
                 observaciones='".$this->observaciones."',
                 status='".$this->status."',
                 modified_at='".$this->modified_at."'
@@ -92,10 +92,24 @@ public function get_favoritos($uid, $id){
     return $this->execute($query);
 }
 
-public function isDuplicate($nombre){
-    $query = 'SELECT id FROM usuario WHERE correo="'.$nombre.'" LIMIT 1';
+public function isDuplicate($correo){
+    $query = 'SELECT id FROM usuario WHERE correo="'.$correo.'" LIMIT 1';
     $result = $this->execute($query);
     if(count($result)>0){ return true; }else{ return false; }
+}
+
+public function isEmail($id, $correo){
+  $query = 'SELECT id FROM usuario WHERE correo = "'.$correo.'" AND id <> '.$id;
+  return $this->execute($query);
+}
+public function isTelefono($telefono,$id=null){
+  $query = 'SELECT id FROM usuario WHERE telefono = '.$telefono.' AND id <> '.$id;
+  // if($id){$query .= ' AND id = '.$id;}
+  return $this->execute($query);
+}
+public function isCelular($celular, $id=null){
+  $query = 'SELECT id FROM usuario WHERE celular = '.$celular.' AND id <> '.$id;
+  return $this->execute($query);
 }
 public function isRegistered($user, $pass){
     $query = 'SELECT * FROM usuario WHERE correo = "'.$user.'" AND contrasena = "'.$pass.'" AND status = 1 LIMIT 1';

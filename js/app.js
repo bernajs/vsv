@@ -22,6 +22,7 @@ Cliente = {
         $(document).on("click", "a.onRecover", function (e) {_self.recover(e);});
         $(document).on("click", "a.onQuinta", function (e) {_self.quinta(e);});
         $(document).on("click", "a.onReservar", function (e) {_self.reservar(e);});
+        $(document).on("click", "a.onUpdate", function (e) {_self.update(e);});
         $('.isRequired').keyup(function () {$(this).parent().removeClass('has-danger');});
         $('.isNumber').keyup(function () { this.value = this.value.replace(/[^0-9\.]/g, ''); });
         // (e.currentTarget.dataset.id);
@@ -251,6 +252,22 @@ Cliente = {
                 // swal("Algo salió mal, por favor vuelve a intentarlo.");
             }
         });
+    },
+    update: function () {
+        var _self = this;
+        var info = DAO.toObject($("#frmUsuario").serializeArray());
+        if (!_self.validate("#frmUsuario")) {swal('', 'Por favor llena los campos marcados', 'error'); return;}
+        if (!isValidEmail(info.correo)) {swal('','Por favor ingresa un email válido.', 'error');return;}
+        DAO.execute("_ctrl/ctrl.usuario.php", {
+                exec: "update",
+                data: info
+            }, function (r) {
+                if (r.status == 202) {
+                    swal("Felicidades, tu perfil ha sido actualizado.");
+                } else {
+                    swal("Ocurrió un error, por favor vuelvea intentarlo.");
+                }
+            });
     },
     validate: function (form) {
   		var flag = true;
