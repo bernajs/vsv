@@ -1,7 +1,9 @@
 <?php
 
+include_once('admin/_class/class.usuario.php');
 include_once('admin/_class/class.quinta.php');
 $Quinta = new Quinta();
+$Usuario = new Usuario();
 if(isset($_GET['id'])){
   $id = $_GET['id'];
   $quinta = $Service->get_quinta($id);
@@ -30,9 +32,28 @@ if(isset($_GET['id'])){
               </div>';
               if($i == 1){$buffer_resenas .= '<div class="col-12"><a>Ver más</a></div>';}
     }}else{$buffer_resenas = '<div class="col-12"><h4>Esta quinta aún no tiene ninguna reseña</h4></div>';}
-  }else{redirect('index.php');}
-}else{redirect('index.php');}
-
+  }
+}
+if($uid){$favorito = $Usuario->get_favoritos($uid, $id);}
+if($favorito){$txtFav = '<a class="delFavorito cw" data-fid="'.$favorito[0]['id'].'" data-qid="'.$id.'" data-uid="'.$uid.'">Eliminar de favoritos</a>';}
+else{$txtFav = '<a class="addFavorito cw" data-fid="'.$favorito['id'].'" data-qid="'.$id.'" data-uid="'.$uid.'">Agregar a favoritos</a>';}
+$buffer_subheader = '<div class="row">
+        <div class="col-12 col-md-8">
+          <h1>'.$quinta['nombre'].'</h1>
+          <p>
+          '.$calificacion.'
+          </p>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="row">
+            <div class="col-7 offset-md-5">
+              <a href="index.php?call=reservar&id'.$id.'" class="btn btn-primary fwidth shadow bs cw py-3 mb-2">Reservar</a>
+              <i class="text-danger fa fa-heart" aria-hidden="true"></i>
+              '.$txtFav.'
+            </div>
+          </div>
+        </div>
+      </div>';
 ?>
   <div class="row slider-mapa">
     <div class="col-12 col-md-6 px-0 pr-md-2 pl-md-0 slider-quinta pr-md-3">
@@ -195,24 +216,7 @@ galleryTop.params.control = galleryThumbs;
 galleryThumbs.params.control = galleryTop;
 
 $(document).ready(function(){
-  buffer = '<div class="row">\
-          <div class="col-12 col-md-8">\
-            <h1><?php echo $quinta['nombre']; ?></h1>\
-            <p>\
-            <?php echo $calificacion; ?>\
-            </p>\
-          </div>\
-          <div class="col-12 col-md-4">\
-            <div class="row">\
-              <div class="col-7 offset-md-5">\
-                <a href="index.php?call=reservar&id<?php echo $id; ?>" class="btn btn-primary fwidth shadow bs cw py-3 mb-2">Reservar</a>\
-                <i class="text-danger fa fa-heart" aria-hidden="true"></i>\
-                <span>Agregar a favoritos</span>\
-              </div>\
-            </div>\
-          </div>\
-        </div>';
-  $('.sub-header .container').html(buffer);
+  $('.sub-header .container').html(`<?php echo $buffer_subheader ?>`);
 
   $('.resena .text-truncate').click(function(){if($(this).hasClass('text-truncate')){$(this).removeClass('text-truncate');}else{$(this).addClass('text-truncate');}})
 })

@@ -93,5 +93,22 @@ case "asociarme":
 }
 echo json_encode($result);
 break;
+case "del_favorito":
+    $data = $_POST['data'];
+    $obj->set_id($data)->db('del_favorito');
+    $result["status"] = 202;
+echo json_encode($result);
+break;
+case "favorito":
+    $data = $_POST['data'];
+    $obj->set_id($data['uid'])->
+    set_id_quinta($data['id'])->
+    set_created_at(date("Y-m-d H:i:s"))->
+    db('favorito');
+    $fid = $obj->getLastInserted();
+    $result["fid"] = $fid;
+    $result["status"] = 202;
+echo json_encode($result);
+break;
 }
 ?>

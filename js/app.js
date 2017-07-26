@@ -13,6 +13,8 @@ Cliente = {
         var _self = this;
         $(document).on("click", "a.onFbLogin", function (e) {_self.fb_login(e);});
         $(document).on("click", "a.onLogin", function (e) {_self.login(e);});
+        $(document).on("click", "a.addFavorito", function (e) {_self.add_favorito(e);});
+        $(document).on("click", "a.delFavorito", function (e) {_self.del_favorito(e);});
         $(document).on("click", "a.onLoginQuinta", function (e) {_self.login_quinta(e);});
         $(document).on("click", "a.socioLogin", function (e) {_self.socioLogin(e);});
         $(document).on("click", "a.onAsociarme", function (e) {_self.asociarme(e);});
@@ -22,6 +24,7 @@ Cliente = {
         $(document).on("click", "a.onReservar", function (e) {_self.reservar(e);});
         $('.isRequired').keyup(function () {$(this).parent().removeClass('has-danger');});
         $('.isNumber').keyup(function () { this.value = this.value.replace(/[^0-9\.]/g, ''); });
+        // (e.currentTarget.dataset.id);
     },
     asociarme: function () {
         var _self = this;
@@ -144,6 +147,34 @@ Cliente = {
             }
         });
 
+    },
+    add_favorito: function (e) {
+        var id = (e.currentTarget.dataset.qid);
+        var uid = (e.currentTarget.dataset.uid);
+        if(!uid){swal('','Para agregar a favorito debes de estar registrado', 'error');return;}
+        DAO.execute("_ctrl/ctrl.usuario.php", {
+            exec: "favorito",
+            data: {'id':id, 'uid':uid}
+        }, function (r) {
+            if (r.status == 202) {
+              $('.addFavorito').addClass('delFavorito').removeClass('addFavorito').attr('data-fid', r.fid).text('Eliminar de favoritos');
+            } else{
+                swal("Algo salió mal, por favor vuelve a intentarlo.");
+            }
+        });
+    },
+    del_favorito: function (e) {
+        var fid = (e.currentTarget.dataset.fid);
+        DAO.execute("_ctrl/ctrl.usuario.php", {
+            exec: "del_favorito",
+            data: fid
+        }, function (r) {
+            if (r.status == 202) {
+              $('.delFavorito').addClass('addFavorito').removeClass('delFavorito').text('Agregar a favoritos');
+            } else{
+                swal("Algo salió mal, por favor vuelve a intentarlo.");
+            }
+        });
     },
     login_quinta: function () {
         var _self = this;

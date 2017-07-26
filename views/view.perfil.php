@@ -5,7 +5,7 @@ else{header("Location: http://localhost/mobkii/vsv/index.php");}
 <div class="row justify-content-between">
   <div class="col-12 profile-info py-md-5 px-md-5 py-1 px-1">
     <form>
-        <!-- <div class="row">
+        <div class="row">
           <div class="col-6 form-group">
             <label for="nombre">Nombre</label>
             <input type="text" name="nombre" value="" class="form-control">
@@ -33,8 +33,8 @@ else{header("Location: http://localhost/mobkii/vsv/index.php");}
           <div class="col-6 offset-3">
             <button type="button" name="button" class="btn btn-primary bt fwidth">Guardar</button>
           </div>
-        </div> -->
-<div class="row">
+        </div>
+<!-- <div class="row">
   <div class="col-md-6 col-12 mt-3">
     <div class="form-group row">
       <label for="nombre" class="col-md-2 col-3 col-form-label">Nombre:</label>
@@ -86,7 +86,7 @@ else{header("Location: http://localhost/mobkii/vsv/index.php");}
   <div class="col-md-6 col-12 mt-3 offset-md-3">
     <button type="button" name="button" class="btn btn-primary bs fwidth">Guardar</button>
   </div>
-</div>
+</div> -->
     </form>
   </div>
   <div class="col-12 tabla-info mt-5 p-5 pt-0">
@@ -205,8 +205,9 @@ body{background-color: #e8e6e6;}
 <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js" charset="utf-8"></script>
 <script type="text/javascript">
   $(document).ready(function(){
+    moment.locale('es');
     var fecha = '<?php echo $usuario['created_at']; ?>';
-    fecha = moment(fecha).format('DD/MM/YYYY');
+    fecha = moment(fecha).format('DD/MMMM/YYYY');
     $('.sub-header h1').html('Mi perfil'); $('.sub-header p').html('Miebro desde: ' + fecha);
     $(document).ready(function() {
       $('#example').DataTable();

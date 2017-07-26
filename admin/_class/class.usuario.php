@@ -14,6 +14,7 @@ class Usuario extends Helper {
     var $created_at;
     var $modified_at;
     var $id;
+    var $id_quinta;
 
     public function __construct(){ $this->sql = new db(); }
 
@@ -33,6 +34,14 @@ class Usuario extends Helper {
                 '".$this->created_at."'
                 )";
                 break;
+            case "favorito":
+                    $query = "INSERT INTO favorito (id_usuario,id_quinta,created_at)
+                    VALUES (
+                    '".$this->id."',
+                    '".$this->id_quinta."',
+                    '".$this->created_at."'
+                    )";
+            break;
             case "update":
                 $query = "UPDATE usuario
                 SET
@@ -47,12 +56,12 @@ class Usuario extends Helper {
                 modified_at='".$this->modified_at."'
                 WHERE id=".$this->id;
                 break;
-            case "delete": $query = "DELETE FROM usuario WHERE id=".$this->id;
-                break;
+                case "del_favorito": $query = "DELETE FROM favorito WHERE id=".$this->id;break;
+                case "delete": $query = "DELETE FROM usuario WHERE id=".$this->id;break;
     }
     $lid = false;
     if($key=="insert"){ $lid = true; }
-    $this->execute($query,$lid);
+    $this->execute($query,true);
 }
 
 public function get_data($id = null){
@@ -74,6 +83,13 @@ public function get_caracteristicas_quinta($id){
 public function get_caracteristicas(){
   $query = 'SELECT * FROM caracteristica WHERE status = 1';
   return $this->execute($query);
+}
+
+public function get_favoritos($uid, $id){
+    $query = 'SELECT favorito.id_quinta, favorito.id, quinta.nombre, favorito.created_at FROM favorito
+    INNER JOIN quinta ON quinta.id = favorito.id_quinta WHERE favorito.id_usuario = '.$uid;
+    if($id){$query .= ' AND favorito.id_quinta = '.$id;}
+    return $this->execute($query);
 }
 
 public function isDuplicate($nombre){

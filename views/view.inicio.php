@@ -6,7 +6,7 @@ if($quintas_destacadas){
   foreach ($quintas_destacadas as $quinta) {
     $calificacion = get_calificacion($quinta['calificacion']);
     $quintas_destacadas_pr .= '
-    <div class="bg pb-4">
+    <div class="bg">
       <img src="http://placehold.it/940x528" class="image-fluid text-center">
       <div class="servicios-quinta row justify-content-between py-2">
       <div class="col-2 text-center center-text">
