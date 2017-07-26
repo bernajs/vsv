@@ -1,0 +1,39 @@
+me quede en el boton de guardar en quinta cuando no agregar ninguna foto no guarda
+
+
+Quinta detalle (view.quinta.php)
+  Me quede en la parte de servicio
+  Agregue una tabla quinta servicios y haré lo de agregar servicios en el admin de la quinta
+
+
+Todo
+  Agregar modulo proveedores que antes eran los servicios
+  ejemplos (sillas, musica, dj etc)
+  Proveedores tendra imagen
+  Servicios tendra un icono
+
+Los servicios son caracteristicas de la quinta
+  ejemplos(alberca, cancha, etc)
+
+
+
+
+  DUDAS
+  Quinta
+    Cuantas caracteristicas tendra la quinta? Y cuales se van a mostrar
+    Abajo de descripcion se repiten las caracteristicas
+    Que es terminos y cancelaciones
+
+
+
+Centrar nombre de quinta, darle el height por defecto de tres renglones o dos y con clases text center y vertical align
+
+
+
+Quinta
+  Donde se muestra el precio del horario?
+  Pago
+    Servicios? Que informacion va ahi?
+    Vigencia esta mes y año junto?
+
+  Videos de quinta, en que parte se muestran?

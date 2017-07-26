@@ -1,0 +1,17 @@
+urls
+
+Administrador quintas:
+  http://quintear.mobkii.net/misquintas/login.php
+  http://quintear.mobkii.net/misquintas/index.php?call=registro
+  http://quintear.mobkii.net/misquintas/index.php?call=perfil
+  http://quintear.mobkii.net/misquintas/index.php?call=reservaciones
+  http://quintear.mobkii.net/misquintas/index.php?call=suscripcion
+  http://quintear.mobkii.net/misquintas/index.php?call=solicitar_cambio
+
+Usuario normal:
+  http://quintear.mobkii.net/index.php
+  http://quintear.mobkii.net/index.php?call=quintas
+  http://quintear.mobkii.net/index.php?call=quinta
+  http://quintear.mobkii.net/index.php?call=reservar
+  http://quintear.mobkii.net/index.php?call=servicio
+  http://quintear.mobkii.net/index.php?call=resenas

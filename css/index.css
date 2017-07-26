@@ -1,0 +1,49 @@
+footer{
+  /*margin-top: 40px;*/
+  color: white;
+}
+
+footer input{
+  border-radius: 0px !important;
+  width: auto !important;
+  display: inline !important;
+  margin:0px !important;
+  height: 40px;
+  border: none !important;
+}
+
+.div-suscribete{
+  /*padding:20px 15%;*/
+}
+
+.clima-div{
+  position: fixed;
+  z-index: 100;
+  right: 0;
+}
+
+.btn-suscribirme{
+  border-radius: 0px !important;
+  border: none !important;
+  width: auto !important;
+  display: inline;
+  margin: 0px !important;
+  cursor: pointer;
+  position: absolute;
+  height: 40px;
+  color:white !important;
+}
+
+.div-info{
+  /*background-color: gray;*/
+  /*padding:20px 15%;*/
+}
+.div-info ul{
+  list-style-type: none;
+  padding-left: 0px;
+}
+
+.div-info a{color:white !important;}
+
+.div-terminos{
+}
