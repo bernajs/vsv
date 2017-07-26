@@ -22,15 +22,7 @@ if (isset($_GET['call'])) {
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.6/sweetalert2.css" />
     <style media="screen">
-      /*.row{height: 100vh}*/
-      /*.container{padding:5%;}*/
-      .main{
-        position: absolute;
-left: 25%;
-top: 50%;
-margin-left: -150px;
-margin-top: -150px;
-      }
+      .main{position: absolute;left: 25%;top: 50%;margin-left: -150px;margin-top: -150px;}
       .left-children-1{background-color: #3e3e3e; height: 18.750em;}
       .left-children-2{background-color: #6d6d6d; height: 18.750em;}
       .left-parent{padding:0px;}
@@ -38,6 +30,7 @@ margin-top: -150px;
       .parent-right{background-color: white; padding-top: 5em;}
       .left-parent a{border:1px solid white; background: transparent; color:white !important;}
       .descripcion-registro{font-size: 12px;}
+      .btn-secondary:hover{color:black !important;}
       body{
         background: url('img/quintear-bg-login-usuarios.jpg') no-repeat center center fixed;
         background-size: cover;
@@ -95,10 +88,6 @@ margin-top: -150px;
       </div>
     </div>
     </div>
-
-
-
-
     <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="

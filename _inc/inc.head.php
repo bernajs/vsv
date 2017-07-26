@@ -5,9 +5,6 @@ if(isset($_SESSION["uid"])){
     $uid = $_SESSION['uid'];
 }else{
 }
-function redirect($url){
-  header("Location: http://localhost/mobkii/vsv/index.php");
-}
 
 function get_calificacion($calificacion){
   $calificacion_pr .=  str_repeat('<i class="fa fa-star positivo mx-2" aria-hidden="true"></i>', $calificacion);
@@ -15,4 +12,12 @@ function get_calificacion($calificacion){
   return $calificacion_pr;
 }
 
-// $uid = 1;
+function Redirect($url, $permanent = false){
+  // if (headers_sent() === false){
+  //   header('Location: ' . $url, true, ($permanent === true) ? 301 : 302);
+  // }
+  // exit();
+  echo "<script>location.href='index.php'</script>";
+}
+
+?>

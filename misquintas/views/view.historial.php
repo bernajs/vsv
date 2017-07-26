@@ -1,5 +1,5 @@
 <div class="row justify-content-between">
-  <div class="col-6 px-4 py-5 bw">
+  <div class="col-md-6 col-12 px-4 py-5 bw">
     <div class="row align-items-center">
       <div class="col-12">
         <div class="row">
@@ -80,7 +80,6 @@
 
 <style media="screen">
 .total{border-bottom: 1px solid;}
-body{background-color: #e8e6e6;}
   h4{display: inline;}
   .datatable{background-color: lightgray;}
   .form-group label{color:#16b8ff !important}

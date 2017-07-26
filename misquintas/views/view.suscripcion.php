@@ -64,7 +64,7 @@
       </div>
     </div>
   </div>
-  <div class="col-6 px-4 py-5 bw">
+  <div class="col-md-6 col-12 mt-md-0 mt-4 px-4 py-5 bw">
     <div class="row align-items-center">
       <div class="col-12">
         <div class="row">
@@ -136,7 +136,6 @@
 <script src="../admin/assets/vendors/js/tables/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js" charset="utf-8"></script>
 <style media="screen">
-body{background-color: #e8e6e6;}
   h4{display: inline;}
   .datatable{background-color: lightgray;}
   .form-group label{color:#16b8ff !important}

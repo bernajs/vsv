@@ -160,7 +160,6 @@ else{header("Location: http://localhost/mobkii/vsv/index.php");}
 </div>
 
 <style media="screen">
-body{background-color: #e8e6e6;}
 .navbar a {color: black !important;}
 .sub-header{margin-top: 0px;}
 .profile-pic, .profile-info, .tabla-info{
@@ -184,7 +183,7 @@ body{background-color: #e8e6e6;}
 
 
   .total{border-bottom: 1px solid;}
-  body{background-color: #e8e6e6;}
+  body{background-color: #EFF2F7;}
     h4{display: inline;}
     .datatable{background-color: lightgray;}
     .form-group label{color:#16b8ff !important}

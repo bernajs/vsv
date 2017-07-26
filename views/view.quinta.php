@@ -32,7 +32,7 @@ if(isset($_GET['id'])){
               </div>';
               if($i == 1){$buffer_resenas .= '<div class="col-12"><a>Ver más</a></div>';}
     }}else{$buffer_resenas = '<div class="col-12"><h4>Esta quinta aún no tiene ninguna reseña</h4></div>';}
-  }
+  }else{Redirect('http://localhost/mobkii/vsv/index.php');}
 }
 if($uid){$favorito = $Usuario->get_favoritos($uid, $id);}
 if($favorito){$txtFav = '<a class="delFavorito cw" data-fid="'.$favorito[0]['id'].'" data-qid="'.$id.'" data-uid="'.$uid.'">Eliminar de favoritos</a>';}

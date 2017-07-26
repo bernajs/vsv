@@ -22,6 +22,7 @@
 <style media="screen">
   .container{margin-top: 80px;}
   .navbar a{color:white !important;}
+  body{background-color: #EFF2F7;}
 </style>
 
 
@@ -148,6 +149,6 @@ $('.card img').attr('src', 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.6/sweetalert2.js"></script>
-<script src="../js/app.js" charset="utf-8"></script>
+<script src="js/app.js" charset="utf-8"></script>
   </body>
 </html>

@@ -22,7 +22,7 @@
           <div class="col-md-11 col-12 mb-4 bw p-4">
             <div id='calendar'></div>
           </div>
-          <div class="col-md-11 col-12 bw mt-md-3 mb-4 p-4">
+          <div class="col-md-11 col-12 bw mt-md-3 mb-4 mb-md-0 p-4">
               <div class="row">
                 <div class="col-12 agendar">
                   <h4 class="">Agendar mi calendario</h4>
@@ -73,7 +73,7 @@
         </div>
       </div>
 
-      <div class="col-6 px-4 py-5 bw">
+      <div class="col-md-6 col-12 px-4 py-5 bw">
         <div class="row align-items-center">
           <div class="col-11">
             <div class="row">
@@ -159,7 +159,7 @@
     /*padding:50px;*/
   }
   .total{border-bottom: 1px solid;}
-  body{background-color: #e8e6e6;}
+  body{background-color: #EFF2F7;}
     h4{display: inline;}
     .datatable{background-color: lightgray;}
     .form-group label{color:#16b8ff !important}

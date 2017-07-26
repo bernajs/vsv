@@ -9,20 +9,23 @@
       <div class="col-md-3 col-12 mt-md-4 mt-2">
         <div class="card text-center">
           <img class="card-img-top" src="" alt="Card image cap">
-          <div class="card-block text-center">
+          <div class="card-block text-center pt-3">
             <div class="row" style="height:44px;"><div class="col-12 align-self-center">
             <h6 class="card-title ct mb-0">'.$quinta['nombre'].'</h6>
-            </div></div>
+            </div>
+            <div class="col-12 align-self-center">
             <p class="card-text">
             <span>Direccion</span><br>
             <span>Servicios</span>
+            </div>
+            </div>
           </p>
           </div>
         </div>
         <div class="acciones-quinta text-center">
-        <span class="ct">Solicitar edición <span class="clg"> | </span></span>
-        <span class="ct"> Vista previa <span class="clg"> | </span></span>
-        <span class="ct"> Reseñas</span>
+        <a class="ct openEdicion" data-toggle="modal" data-target="#modalEdicion" data-id="'.$quinta['id'].'">Solicitar edición <span class="clg"> | </span></a>
+        <a href="../index.php?call=quinta&id='.$quinta['id'].'" target="_blank" class="ct"> Vista previa <span class="clg"> | </span></a>
+        <a class="ct onResena" data-id="'.$quinta['id'].'"> Reseñas</a>
       </div>
       </div>
       ';
@@ -32,45 +35,46 @@
 <div class="row justify-content-between">
   <div class="col-12 col-md-3 text-center profile-pic py-4 mr-md-4">
     <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" class="img-fluid rounded-circle"alt="">
-    <h6 class="mt-4 ct">Usuario</h6>
+    <h6 class="mt-4 ct"><?php echo $usuario['nombre']; ?></h6>
     <span>Tipo de suscripción</span><br>
-    <span>Desde: 01/03/2017</span>
+    <span>Desde: <?php echo date('d-m-Y', strtotime($usuario['created_at'])); ?></span>
   </div>
   <div class="col-12 col-md-8 profile-info py-md-5 px-md-5">
-    <form>
+    <form id="frmUsuario">
         <div class="row">
-          <div class="col-6 form-group">
+          <div class="col-12 form-group">
             <label for="nombre">Nombre</label>
-            <input type="text" name="nombre" value="<?php echo $usuario['nombre']; ?>" class="form-control">
+            <input type="text" name="nombre" value="<?php echo $usuario['nombre']; ?>" class="form-control isRequired">
           </div>
           <div class="col-6 form-group">
             <label for="apellido">Apellidos</label>
-            <input type="text" name="apellido" id="apellido" value="<?php echo $usuario['apellido']; ?>" class="form-control">
+            <input type="text" name="apellido" id="apellido" value="<?php echo $usuario['apellido']; ?>" class="form-control isRequired">
           </div>
           <div class="col-6 form-group">
             <label for="correo">Correo</label>
-            <input type="email" name="correo" id="correo" value="<?php echo $usuario['correo']; ?>" class="form-control">
+            <input type="email" name="correo" id="correo" value="<?php echo $usuario['correo']; ?>" class="form-control isRequired">
           </div>
           <div class="col-6 form-group">
             <label for="celular">Celular</label>
-            <input type="text" name="celular" id="celular" value="<?php echo $usuario['celular']; ?>" class="form-control">
+            <input type="text" name="celular" id="celular" value="<?php echo $usuario['celular']; ?>" class="form-control isRequired isNumber">
           </div>
           <div class="col-6 form-group">
             <label for="telefono">Teléfono</label>
-            <input type="text" name="telefono" id="telefono" value="<?php echo $usuario['telefono']; ?>" class="form-control">
+            <input type="text" name="telefono" id="telefono" value="<?php echo $usuario['telefono']; ?>" class="form-control isRequired isNumber">
           </div>
           <div class="col-6 form-group">
             <label for="contrasena">Contraseña</label>
-            <input type="password" name="contrasena" id="contrasena" value="<?php echo $usuario['contrasena']; ?>" class="form-control">
+            <input type="password" name="contrasena" id="contrasena" value="<?php echo $usuario['contrasena']; ?>" class="form-control isRequired">
           </div>
           <div class="col-6 form-group">
             <label for="confirmar_contrasena">Confirmar contraseña</label>
-            <input type="password" name="confirmar_contrasena" id="confirmar_contrasena" value="<?php echo $usuario['contrasena']; ?>" class="form-control">
+            <input type="password" name="confirmar_contrasena" id="confirmar_contrasena" value="<?php echo $usuario['contrasena']; ?>" class="form-control isRequired">
           </div>
-          <div class="col-6 text-center form-group">
-            <button type="button" name="button" class="btn btn-primary fwidth br-50 bs" style="margin-top:30px;">Guardar</button>
+          <div class="col-6 offset-3 text-center form-group">
+            <a class="btn btn-primary fwidth br-50 bs onUpdate cw">Guardar</a>
           </div>
         </div>
+        <input type="hidden" name="id" value="<?php echo $uid; ?>">
     </form>
   </div>
   <div class="col-12 p-4 bw mt-5">
@@ -227,26 +231,53 @@
           </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
         <a class="btn btn-primary bs onQuinta cw">ENVIAR</a>
       </div>
     </div>
   </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="modalEdicion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Solicitar edición</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form class="" id="frmEdicion">
+            <h6>Redacta los cambios que quieres hacer en tu Quinta</h6>
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <textarea name="edicion" class="form-control"></textarea>
+                </div>
+              </div>
+            </div>
+            <input type="hidden" name="id" id="id_edicion" value="">
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
+        <a class="btn btn-primary bs onEdicion cw">ENVIAR</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <style media="screen">
-  img{
-  }
-
   .card-block{background-color: #fbfbfb;}
-
-.profile-pic, .profile-info{
-    background-color: white;
-  }
-
-  body{background-color:#f3f2f2}
-
+  .profile-pic, .profile-info{background-color: white;}
   .acciones-quinta{font-size: 12px;}
-
-  /*.profile  -info{padding:50px;}*/
 </style>
+<script type="text/javascript">
+  $('.openEdicion').click(function(){
+    var id = $(this).data('id');
+    console.log(id);
+    $('#id_edicion').val(id);
+  })
+</script>
