@@ -1,6 +1,28 @@
 <?php
 if($uid){
-  $usuario = $Service->get_usuario($uid);$usuario = $usuario[0];
+  include('admin/_class/class.usuario.php');
+  $Usuario = new Usuario();
+  // Perfil de usuario
+  $usuario = $Usuario->get_data($uid);$usuario = $usuario[0];
+  // Lista de favoritos
+  $favoritos = $Usuario->get_favoritos($uid);
+  if($favoritos){foreach ($favoritos as $key => $favorito) {
+    $buffer_favoritos .= '<a class="list-group-item list-group-item-action" href="index.php?call=quinta&id='.$favorito['id_quinta'].'">'.$favorito['nombre'].'</a>';
+  }}else{$buffer_favoritos = "<h6>No tienes ninguna Quinta en tu lista de favoritos</h6>";}
+
+  // Lista de reservaciones
+  $reservaciones = $Usuario->get_reservaciones($uid);
+  if($reservaciones){foreach ($reservaciones as $key => $reservacion) {
+    $buffer_reservaciones .= '<tr>
+                    <td>'.$reservacion['id'].'</td>
+                    <td>'.$reservacion['nombre'].'</td>
+                    <td>'.date('d-m-Y',strtotime($reservacion['created_at'])).'</td>
+                    <td>'.date('d-m-Y',strtotime($reservacion['fecha'])).'</td>
+                    <td>'.date('H:m', $reservacion['inicio']).' a '.date('H:m', $reservacion['fin']).'</td>
+                    <td>Aprobado</td>
+                    <td class="pagado">Aprobado</td>
+                </tr>';
+  }}else{$buffer_reservaciones = '<h6>Aún no ha hecho ninguna reservación</h6>';}
 }
 else{header("Location: http://localhost/mobkii/vsv/index.php");}
  ?>
@@ -22,11 +44,11 @@ else{header("Location: http://localhost/mobkii/vsv/index.php");}
           </div>
           <div class="col-6 form-group">
             <label for="telefono">Teléfono</label>
-            <input type="text" name="telefono" value="<?php echo $usuario['telefono']; ?>" class="form-control isRequired">
+            <input type="text" name="telefono" value="<?php echo $usuario['telefono']; ?>" class="form-control isRequired isNumber">
           </div>
           <div class="col-6 form-group">
             <label for="celular">Celular</label>
-            <input type="text" name="celular" value="<?php echo $usuario['celular']; ?>" class="form-control isRequired">
+            <input type="text" name="celular" value="<?php echo $usuario['celular']; ?>" class="form-control isRequired isNumber">
           </div>
           <div class="col-6 form-group">
             <label for="contrasena">Contraseña</label>
@@ -116,46 +138,23 @@ else{header("Location: http://localhost/mobkii/vsv/index.php");}
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Periodo</th>
+                <th>Quinta</th>
                 <th>Fecha de pago</th>
-                <th>Servicio</th>
+                <th>Fecha reservada</th>
+                <th>Horario</th>
+                <th>Precio</th>
                 <th>Estado</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Enero</td>
-                <td>01-ene-2017</td>
-                <td>Premium</td>
-                <td class="pagado">Aprobado</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Enero</td>
-                <td>01-ene-2017</td>
-                <td>Premium</td>
-                <td class="pagado">Aprobado</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Enero</td>
-                <td>01-ene-2017</td>
-                <td>Premium</td>
-                <td class="pagado">Aprobado</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Enero</td>
-                <td>01-ene-2017</td>
-                <td>Premium</td>
-                <td class="pagado">Aprobado</td>
-            </tr>
+          <?php echo $buffer_reservaciones; ?>
         </tbody>
     </table>
       </div>
       <div class="tab-pane" id="metodos" role="tabpanel">...</div>
-      <div class="tab-pane" id="favoritos" role="tabpanel">...</div>
+      <div class="tab-pane" id="favoritos" role="tabpanel">
+        <ul class="list-group"><?php echo $buffer_favoritos; ?></ul>
+      </div>
     </div>
   </div>
 </div>
