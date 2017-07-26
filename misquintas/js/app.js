@@ -11,15 +11,16 @@ Cliente = {
     /* EVENT LISTENERS */
     addEventListeners: function () {
         var _self = this;
+        $(document).on("click", "a.onAsociarme", function (e) {_self.asociarme(e);});
+        $(document).on("click", "a.onEdicion", function (e) {_self.edicion(e);});
         $(document).on("click", "a.onFbLogin", function (e) {_self.fb_login(e);});
         $(document).on("click", "a.onLogin", function (e) {_self.login(e);});
         $(document).on("click", "a.onLoginQuinta", function (e) {_self.login_quinta(e);});
-        $(document).on("click", "a.socioLogin", function (e) {_self.socioLogin(e);});
-        $(document).on("click", "a.onAsociarme", function (e) {_self.asociarme(e);});
-        $(document).on("click", "a.onRegistro", function (e) {_self.registro(e);});
-        $(document).on("click", "a.onRecover", function (e) {_self.recover(e);});
         $(document).on("click", "a.onQuinta", function (e) {_self.quinta(e);});
+        $(document).on("click", "a.onRecover", function (e) {_self.recover(e);});
+        $(document).on("click", "a.onRegistro", function (e) {_self.registro(e);});
         $(document).on("click", "a.onUpdate", function (e) {_self.update(e);});
+        $(document).on("click", "a.socioLogin", function (e) {_self.socioLogin(e);});
         $('.isRequired').keyup(function () {$(this).parent().removeClass('has-danger');});
         $('.isNumber').keyup(function () { this.value = this.value.replace(/[^0-9\.]/g, ''); });
         // (e.currentTarget.dataset.id);
@@ -49,15 +50,32 @@ Cliente = {
         if (!_self.validate("#frmQuinta")) {swal('', 'Por favor llena los campos marcados', 'error');return false;};
         info.destacado = 0;
         info.videos = 0;
-        DAO.execute("../admin/_ctrl/ctrl.quinta.php", {
+        DAO.execute("../_ctrl/ctrl.quinta.php", {
                 exec: "save",
                 data: info
             }, function (r) {
                 if (r.status == 202) {
-                    swal("", "Felicidades, tu Quitna ha sido registrada, uno de nuestros administradores se pondrá en contacto contigo para activarla.", "success");
+                    swal("", "Felicidades, tu Quinta ha sido registrada, uno de nuestros administradores se pondrá en contacto contigo para activarla.", "success");
                     setTimeout(function(){location.reload();}, 2000);
                 } else if (r.status == 404) {
                     swal("", "Ya hay una Quinta registrada con el nombre ingresado.", "error");
+                }
+            });
+    },
+    edicion: function () {
+        var _self = this;
+        var info = DAO.toObject($("#frmEdicion").serializeArray());
+        if (!_self.validate("#frmEdicion")) {swal('', 'Por favor llena los campos marcados', 'error');return false;};
+        DAO.execute("../_ctrl/ctrl.quinta.php", {
+                exec: "edicion",
+                data: info
+            }, function (r) {
+                if (r.status == 202) {
+                    swal("", "Felicidades, Tu edición ha sido enviada al administrador para que la apruebe.", "success");
+                    $('#cambio').val('');
+                    $('.modal .close').click();
+                } else if (r.status == 404) {
+                    swal("", "Ocurrió un error, por favor vuelve a intentarlo.", "error");
                 }
             });
     },

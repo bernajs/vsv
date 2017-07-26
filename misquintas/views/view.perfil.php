@@ -254,11 +254,11 @@
             <div class="row">
               <div class="col-12">
                 <div class="form-group">
-                  <textarea name="edicion" class="form-control"></textarea>
+                  <textarea name="cambio" id="cambio" class="form-control isRequired"></textarea>
                 </div>
               </div>
             </div>
-            <input type="hidden" name="id" id="id_edicion" value="">
+            <input type="hidden" name="id_quinta" id="id_quinta" value="">
           </form>
       </div>
       <div class="modal-footer">
@@ -275,9 +275,13 @@
   .acciones-quinta{font-size: 12px;}
 </style>
 <script type="text/javascript">
+$(document).ready(function(){
+  $('#inicio').timepicker();
+  $('#fin').timepicker();
+
   $('.openEdicion').click(function(){
     var id = $(this).data('id');
-    console.log(id);
-    $('#id_edicion').val(id);
+    $('#id_quinta').val(id);
   })
+})
 </script>

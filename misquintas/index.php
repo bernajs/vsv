@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="../css/index.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.6/sweetalert2.css" />
+    <link rel="stylesheet" href="../css/jquery.timepicker.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment-with-locales.min.js"></script>
 <style media="screen">
   .container{margin-top: 80px;}
@@ -84,71 +85,14 @@ if (isset($_GET['call'])) {
     include('views/view.perfil.php');
 }
 ?>
-
-    </div><!-- /.container -->
-    <!-- <footer>
-      <div class="row justify-content-center">
-        <div class="col-12 div-suscribete">
-          <div class="row align-items-center">
-          <div class="col">
-          <h3>Suscribete</h3>
-          <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
-          </div>
-          <div class="col">
-            <div class="form-group">
-              <input type="text" id="email_suscribete" name="email_suscribete" class="form-control">
-              <a class="btn btn-primary btn-suscribirme">Suscribirme</a>
-            </div>
-          </div>
-        </div>
-      </div>
-        <div class="col-12 div-info">
-          <div class="row justify-content-center">
-            <div class="col-4">
-              <h4>Ligas de interés</h4>
-              <ul>
-                <li><a href="/inicio">Inicio</a></li>
-                <li><a href="/nosotros">Nosotros</a></li>
-                <li><a href="/faq">FAQ</a></li>
-                <li><a href="/servicios">Servicios</a></li>
-                <li><a href="/Mapa">Mapa</a></li>
-              </ul>
-            </div>
-            <div class="col-4">
-              <h4>Cuenta</h4>
-              <ul>
-                <li><a href="/accesar">Accesar</a></li>
-                <li><a href="/cuenta">Mi cuenta</a></li>
-                <li><a href="/logout.php">Salir</a></li>
-              </ul>
-            </div>
-            <div class="col-4">
-              <h4>Contacto</h4>
-              <address class="">
-              <strong>CSV</strong><br>
-              Dirección #234, Mty <br>
-              Tel. 81 81828340 <br>
-              vsv@mail.com <br>
-              </address>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 div-terminos">
-          <span class="float-left">VSV 2017. Derechos Reservados</span>
-          <span class="float-right">Privacidad</span>
-          <span class="float-right">Términos y condiciones</span>
-        </div>
-      </div>
-    </footer> -->
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-<script type="text/javascript">
-$('.card img').attr('src', 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22318%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20318%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15c69f7d077%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15c69f7d077%22%3E%3Crect%20width%3D%22318%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22118.0546875%22%20y%3D%2297.2%22%3E318x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E');
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.6/sweetalert2.js"></script>
-<script src="js/app.js" charset="utf-8"></script>
+    </div>
+  <script type="text/javascript">
+  $('.card img').attr('src', 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22318%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20318%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15c69f7d077%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A16pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15c69f7d077%22%3E%3Crect%20width%3D%22318%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22118.0546875%22%20y%3D%2297.2%22%3E318x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.6/sweetalert2.js"></script>
+  <script src="../js/plugins/jquery.timepicker.js" charset="utf-8"></script>
+  <script src="js/app.js" charset="utf-8"></script>
   </body>
 </html>

@@ -24,6 +24,8 @@ class Quinta extends Helper {
     var $id;
     var $id_usuario;
     var $id_caracteristica;
+    var $id_quinta;
+    var $cambio;
 
     public function __construct(){ $this->sql = new db(); }
 
@@ -77,6 +79,15 @@ class Quinta extends Helper {
                       '".$this->id."',
                       '".$this->id_caracteristica."',
                       '".$this->created_at."'
+                    )";
+                break;
+            case "edicion":
+                    $query = "INSERT INTO cambios (id_quinta,cambio,status,created_at)
+                    VALUES (
+                    '".$this->id_quinta."',
+                    '".$this->cambio."',
+                    '".$this->status."',
+                    '".$this->created_at."'
                     )";
                 break;
             case "destacado":
