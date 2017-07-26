@@ -12,8 +12,8 @@
         $tbody .= '<td>'.$quinta['ciudad'].'</td><td style="text-align:center;"><a href="javascript:void(0);" class="onDestacado '.$id.'" data-src="quinta" data-id="'.$id.'" data-destacado="'.$quinta['destacado'].'">';
         $quinta['destacado'] == 1 ? $tbody .= '<i class="fa fa-star destacado '.$quinta['id'].'"></i>' : $tbody .= '<i class="fa fa-star ndestacado '.$quinta['id'].'">';
         $tbody .= '</a></td><td class="acciones">
-        <a href="javascript:void(0)" class="onDelete" data-id="'.$id.'" data-src="quinta"><i class="material-icons">delete</i></a>
-        <a class="onEdit" href="index.php?call=quinta_detalle&id='.$id.'"><i class="material-icons">edit</i></a></td>';
+        <a href="javascript:void(0)" class="onDelete" data-id="'.$id.'" data-src="quinta"><i class="ft-trash-2"></i></a>
+        <a class="onEdit" href="index.php?call=quinta_detalle&id='.$id.'"><i class="ft-edit"></i></a></td>';
       }
     }
 ?>
@@ -22,7 +22,7 @@
   <div class="card-header">
     <h4 class="card-title">Quintas</h4>
     <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-    <a href="index.php?call=quinta_detalle" class="btn btn-outline-primary block btn-lg">Agregar Quinta</a>
+    <a href="index.php?call=quinta_detalle" class="btn btn-outline-primary block btn-lg btn-add">Agregar Quinta</a>
   </div>
   <div class="card-body collapse in">
     <div class="card-block">
