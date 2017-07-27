@@ -8,16 +8,44 @@ Crud = {
 	},
 	addEventListeners: function () {
 		var _self = this;
+		$(document).on("click", "button.onQuinta", function (e) { _self.quinta(e); });
+		$(document).on("click", "button.onCambio", function (e) { _self.cambio(e); });
 		$(document).on("click", "button.onSave", function (e) { _self.save(e); });
 		$(document).on("click", "a.onDelete", function (e) { _self.delete(e); });
 		$(document).on("click", "a.onDeleteImagen", function (e) { _self.delete_imagen(e); });
 		$(document).on("click", "button.onClickApprove", function (e) { _self.approve(e); });
 		$(document).on("click", "button.onBuscarDueno", function (e) { _self.get_dueno(e); });
 		$(document).on("click", "a.onDestacado", function (e) { _self.destacado(e); });
-		$(document).on("click", "button.onClickCancel", function (e) { _self.cancel(e); });
-		$(document).on("click", "button.onClickView", function (e) { _self.view(e); });
-		$(document).on("click", "button.onInvoice", function (e) { _self.invoice(e); });
-		$(document).on("click", "button.onView", function (e) { _self.get(e); });
+	},
+	cambio: function (e) {
+		var id = $(e.target).data("id");
+		var action = $(e.target).data("action");
+		if(!confirm('¿Desea '+action+' este cambio?')) return;
+		Dao.execute('quinta',
+			{exec: action+"_cambio",data: id},
+			function (r) {
+				if (r.status == 202) {
+					alert("El cambio se "+action+" correctamente.");
+					location.reload();
+				}else{
+					alert("Algo sucedio mal, por favor vuelva a intentarlo.");
+				}
+			});
+	},
+	quinta: function (e) {
+		var action = $(e.target).data("action");
+		var id = $(e.target).data("id");
+		if(!confirm('¿Desea '+action+' esta Quinta?')) return;
+		Dao.execute('quinta',
+			{exec: action,data: id},
+			function (r) {
+				if (r.status == 202) {
+					alert("La Quinta se "+action+" correctamente.");
+					location.reload();
+				}else{
+					alert("Algo sucedio mal, por favor vuelva a intentarlo.");
+				}
+			});
 	},
 	save: function (e) {
 		_self = this;

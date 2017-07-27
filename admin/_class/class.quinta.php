@@ -90,6 +90,10 @@ class Quinta extends Helper {
                     '".$this->created_at."'
                     )";
                 break;
+            case "aprobar":$query = "UPDATE quinta SET status=1 WHERE id=".$this->id;break;
+            case "rechazar":$query = "UPDATE quinta SET status=2 WHERE id=".$this->id;break;
+            case "aprobar_cambio":$query = "UPDATE cambios SET status=1 WHERE id=".$this->id;break;
+            case "rechazar_cambio":$query = "UPDATE cambios SET status=2 WHERE id=".$this->id;break;
             case "destacado":
                 $query = "UPDATE quinta SET destacado='".$this->destacado."', modified_at='".$this->modified_at."' WHERE id=".$this->id;
                 break;
@@ -116,6 +120,17 @@ public function get_data($id = null){
     if($this->search!=NULL) $query .= " AND ".$this->search_field." LIKE '%".$this->search."%'";
     if($this->order!=NULL) $query .= " ORDER BY ".$this->order;
     if($this->limit!=NULL) $query .= " LIMIT ".$this->limit;
+    return $this->execute($query);
+}
+
+public function quintas_pendientes(){
+    $query = 'SELECT * FROM quinta WHERE status = 0';
+    return $this->execute($query);
+}
+
+public function cambios_pendientes($id=null, $quinta=null){
+    $query = 'SELECT * FROM cambios WHERE status = 0';
+    $id ? $query .= ' AND id = '.$id.' AND id_quinta = '.$quinta:true;
     return $this->execute($query);
 }
 

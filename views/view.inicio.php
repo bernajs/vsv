@@ -28,9 +28,8 @@ if($quintas_destacadas){
         <div class="row card-description">
           <div class="col text-center mt-2">'.$calificacion.'
             <div class="row quinta-title align-items-center text-center"><div class="col"><h4 class="m-0">'.$quinta['nombre'].'</h4></div></div>
-            <span>'.$quinta['descripcion'].'</span>
-            <div class="col-6 offset-3 mt-3 ">
-            <a href="index.php?call=quinta&id='.$quinta['id'].'" class="btn btn-primary fwidth bs cw mb-4">Ver quinta</a>
+            <div class="col-6 offset-3 mt-3">
+            <a href="index.php?call=quinta&id='.$quinta['id'].'" class="btn btn-primary fwidth bs cw mb-2">Ver quinta</a>
             </div>
           </div>
       </div>
@@ -38,6 +37,8 @@ if($quintas_destacadas){
     ';
   }
 }
+// <span>'.$quinta['descripcion'].'</span>
+
 // Servicios destacados
 $servicios_destacados = $Service->get_servicios_destacados();
 $servicios_destacados_pr = '';
@@ -54,17 +55,6 @@ $servicios_destacados_pr = '';
        </div>
      </div>
      ';
-
-    //  <div class="col-md-3 col-6 align-items-stretch animated">
-    //    <div class="card text-center">
-    //      <img class="card-img-top img-fluid" src="admin/uploads/servicio/'.$servicio['imagen'].'" alt="Card image cap">
-    //      <div class="card-block">
-    //        <h4 class="card-title">'.$servicio['nombre'].'</h4>
-    //        <p class="card-text">'.$detalles->descripcion.'.</p>
-    //        <a href="'.$detalles->pagina.'" class="btn btn-primary fwidth br-50">Ver</a>
-    //      </div>
-    //    </div>
-    //  </div>
    }
  }
 
@@ -74,28 +64,13 @@ $servicios_destacados_pr = '';
  $promociones_swiper = '';
  if($promociones){
    foreach ($promociones as $promocion) {
-    //  $promociones_pr .= '<a href="'.$promocion['url'].'"><img src="admin/uploads/promocion/'.$promocion['imagen'].'"></a>';
      $promociones_pr .= '<img class="img-fluid" src="admin/uploads/promocion/'.$promocion['imagen'].'">';
      $promociones_swiper .= '<div class="swiper-slide"><img class="img-fluid" src="https://dummyimage.com/1960x640/000/fff"></div>';
  }
  }
  ?>
 
-<!-- <div class="row">
-  <div class="col-12 text-center marginb-20">
-    <h1>Encuentra tu quinta y reserva aquí</h1>
-    <span>Comienza por aquí</span>
-  </div>
-</div> -->
 <div class="row filtro-fondo">
-  <!-- <div class="col-12 slider-principal">
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-          <?php echo $promociones_swiper ?>
-        </div>
-        <div class="swiper-pagination"></div>
-    </div>
-  </div> -->
   <div class="col-12 col-md-3 offset-md-1 col-filtro cw">
     <div class="row align-items-center filtro-1 bp">
       <div class="col-12">
@@ -178,7 +153,6 @@ $servicios_destacados_pr = '';
   </div>
 </div>
   <style media="screen">
-  /*.col-filtro{display:none;position:absolute;top:10%; left:10%;}*/
   .filtro-fondo{
     padding:50px 3%;
     background: url('img/fondo.jpg') no-repeat center center fixed;
@@ -241,25 +215,21 @@ $servicios_destacados_pr = '';
   <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
   <script type="text/javascript">
   $(document).ready(function(){
-    $('.slider').slick({autoplay:true, speed:1000, autoplaySpeed:5000, pauseOnFocus:true,adaptiveHeight: true});
-    $('.slider3').slick({autoplay:true, speed:1000, autoplaySpeed:5000, pauseOnFocus:true,adaptiveHeight: true});
+    $('.slider').slick({autoplay:true, speed:1000, autoplaySpeed:5000, pauseOnFocus:true,adaptiveHeight: false});
+    $('.slider3').slick({autoplay:true, speed:1000, autoplaySpeed:5000, pauseOnFocus:true,adaptiveHeight: false});
     $('.slider2').slick({
       dots: false,
       infinite: true,
       speed: 300,
       slidesToShow: 1,
-      adaptiveHeight: true,
+      adaptiveHeight: false,
       autoplay: true,
       pauseOnFocus:true
     });
-
-    $('.onBuscar').click(function(e){location.href="index.php?call=quintas"})
-  })
+  });
 
   $('.animated').hover(function(){$(this).addClass('pulse');}, function(){$(this).removeClass('pulse');})
   var swiper = new Swiper('.swiper-container', {
-      // pagination: '.swiper-pagination',
-      // paginationClickable: true
   });
 
 

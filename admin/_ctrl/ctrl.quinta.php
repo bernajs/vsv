@@ -72,6 +72,30 @@ case "delete":
     $result['status'] = 202;
     echo json_encode($result);
     break;
+case "aprobar":
+    $data = $_POST['data'];
+    $obj->set_id($data)->db('aprobar');
+    $result['status'] = 202;
+    echo json_encode($result);
+break;
+case "rechazar":
+    $data = $_POST['data'];
+    $obj->set_id($data)->db('rechazar');
+    $result['status'] = 202;
+    echo json_encode($result);
+break;
+case "aprobar_cambio":
+    $data = $_POST['data'];
+    $obj->set_id($data)->db('aprobar_cambio');
+    $result['status'] = 202;
+    echo json_encode($result);
+break;
+case "rechazar_cambio":
+    $data = $_POST['data'];
+    $obj->set_id($data)->db('rechazar_cambio');
+    $result['status'] = 202;
+    echo json_encode($result);
+break;
 case "get_dueno":
     $data = $_POST['data'];
     $dueno = $obj->get_dueno($data['id']);

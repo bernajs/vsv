@@ -65,6 +65,12 @@ if(isset($_GET['id'])){
       </label>
     </div>';
   }
+
+  if(isset($_GET['cambio'])){
+    $id_cambio = $_GET['cambio'];
+    $cambio = $Quinta->cambios_pendientes($id_cambio, $id);
+    $cambio = $cambio[0];
+  }
 }else{
   $caracteristicas = $Quinta->get_caracteristicas();
   $lista_caracteristicas = '';
@@ -81,16 +87,19 @@ if(isset($_GET['id'])){
  ?>
 
 <div class="card">
-  <div class="card-header">
+  <div class="card-header pb-0">
     <h4 class="card-title"><?php echo $title; ?></h4>
-  <!-- <ul class="nav nav-tabs">
-    <li class="nav-item">
-      <a class="nav-link active" id="datos" data-toggle="tab" aria-controls="datos" href="#datos-content" aria-expanded="true">Datos</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" id="foto" data-toggle="tab" aria-controls="foto" href="#foto-content" aria-expanded="false">Fotos</a>
-    </li>
-  </ul> -->
+    <?php if($id && $data['status'] == 0): ?>
+      <div class="row">
+      <button type="button" data-id="<?php echo $id; ?>" data-action="aprobar" class="btn btn-outline-primary mt-1 onQuinta">Aprobar Quinta</button>
+      <button type="button" data-id="<?php echo $id; ?>" data-action="rechazar" class="btn btn-outline-primary mt-1 onQuinta">Rechazar Quinta</button>
+    </div>
+    <?php endif; ?>
+    <div class="row">
+      <div class="col-2">
+        <button style="display:block;display:none;" type="button" data-id="<?php echo $id; ?>" class="btn btn-outline-primary mt-1 btn-show-cambio">Mostrar solicitud de cambio</button>
+      </div>
+    </div>
   </div>
   <div class="card-body collapse in">
     <div class="card-block">
@@ -239,27 +248,32 @@ if(isset($_GET['id'])){
                 <button style="width:100%;" type="button" id="onSubirFotos" class="btn btn-outline-primary preSave mt-20" data-form="#frmQuinta" data-src="quinta" data-action="<?php echo $action; ?>">Guardar</button>
                 <button style="width:100%;display:none;" type="button" id="onSave" class="btn btn-outline-primary onSave mt-20" data-form="#frmQuinta" data-src="quinta" data-action="<?php echo $action; ?>">Guardar</button>
               </div>
-            <!-- </div> -->
           </div>
         </div>
-        <!-- <div class="tab-pane" id="foto-content" aria-labelledby="foto">
-          <div class="row">
-            <div class="col-12">
-              <div class="dropzone" id="dz_fotos"></div>
-            </div>
-            <div class="col-12 mt-20">
-              <h4>Lista de fotos</h4>
-              <div class="row lista-fotos">
-
-              </div>
-              <button type="button" name="button" class="btn btn-primary onSubirFotos">Subir fotos</button>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
 </div>
+
+<?php if ($cambio): ?>
+<div class="col-xl-3 col-lg-6 col-xs-12 div-cambio">
+            <div class="card bg-primary mb-0">
+              <i class="icon-close white font-large-2 float-xs-right" style="cursor:pointer;"></i>
+                <div class="card-body">
+                    <div class="card-block">
+                        <div class="media">
+                            <div class="media-body white">
+                                <h3><strong class="text-xs-left">Cambio:</strong></h3>
+                                <p class="text-justify"><?php echo $cambio['cambio']; ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button style="displat:inline;width:50%;border-radius:0px;" type="button" data-action="aprobar" data-id="<?php echo $cambio['id']?>" class="btn btn-secondary onCambio">Aprobar</button>
+            <button style="displat:inline;width:50%;border-radius:0px;" type="button" data-action="rechazar" data-id="<?php echo $cambio['id']?>" class="btn btn-secondary onCambio float-xs-right">Rechazar</button>
+        </div>
+<?php endif; ?>
 
 <link rel="stylesheet" href="assets/css/dropzone.css">
 
@@ -272,6 +286,11 @@ if(isset($_GET['id'])){
     margin-right: 2.5px;
     margin-left: 2.5px;
   }
+  .div-cambio{
+    color:white;position:fixed;top:113px;right:30px;width:350px;
+  }
+  .div-cambio .bg-primary{opacity: 1;transition: opacity 1s;}
+  .div-cambio .bg-primary:hover{opacity: .2;transition: opacity 1s;z-index: 0;}
 </style>
 
 <script src="assets/js/dropzone.js"></script>
@@ -281,6 +300,14 @@ $('#videos').tokenfield();
 $('#videos').on('tokenfield:removedtoken', function (e) {
   if(!confirm('¿Desea eliminar este video?')) {e.preventDefault();}
 })
+
+$('.icon-close ').click(function(){
+  $('.div-cambio').hide();$('.btn-show-cambio').show();
+})
+$('.btn-show-cambio').click(function(){
+  $(this).hide();
+  $('.div-cambio').show();
+});
 
 
 var fotos = <?php if($fotos) print_r($fotos); else echo "[]";?>;

@@ -1,10 +1,15 @@
 <?php
   $usuario = $Usuario->get_data($uid);
+  // Usuario
   $usuario = $usuario[0];
+  // Quintas
   $quintas = $Usuario->get_quintas($uid);
   if($quintas){
     $lista_quintas = '';
     foreach ($quintas as $quinta) {
+      if($quinta['status'] == 1){
+        $btn_edicion = '<a class="ct openEdicion" data-toggle="modal" data-target="#modalEdicion" data-id="'.$quinta['id'].'">Solicitar edición <span class="clg"> | </span></a>';
+      }
       $lista_quintas .= '
       <div class="col-md-3 col-12 mt-md-4 mt-2">
         <div class="card text-center">
@@ -23,12 +28,14 @@
           </div>
         </div>
         <div class="acciones-quinta text-center">
-        <a class="ct openEdicion" data-toggle="modal" data-target="#modalEdicion" data-id="'.$quinta['id'].'">Solicitar edición <span class="clg"> | </span></a>
+        '.$btn_edicion.'
         <a href="../index.php?call=quinta&id='.$quinta['id'].'" target="_blank" class="ct"> Vista previa <span class="clg"> | </span></a>
         <a class="ct onResena" data-id="'.$quinta['id'].'"> Reseñas</a>
+        <a class="ct openHorario" data-toggle="modal" data-target="#modalHorario" data-id="'.$quinta['id'].'">Agregar horario</a>
       </div>
       </div>
       ';
+      $btn_edicion = '';
     }
   }
 ?>
@@ -95,7 +102,7 @@
   </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal Registrar Quinta -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -237,8 +244,8 @@
     </div>
   </div>
 </div>
-
-<!-- Modal -->
+<!-- End Modal Registrar Quinta -->
+<!-- Modal Edicion Quinta-->
 <div class="modal fade" id="modalEdicion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -258,7 +265,7 @@
                 </div>
               </div>
             </div>
-            <input type="hidden" name="id_quinta" id="id_quinta" value="">
+            <input type="hidden" name="id_quinta" id="id_quinta_edicion" value="">
           </form>
       </div>
       <div class="modal-footer">
@@ -268,7 +275,57 @@
     </div>
   </div>
 </div>
+<!-- End Modal Edicion Quinta -->
 
+<!-- Modal Agregar Horario Quinta-->
+<div class="modal fade" id="modalHorario" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar horario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form class="" id="frmHorario">
+            <div class="row">
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="nombre">Nombre del horario:</label>
+                  <input type="text" name="nombre" class="form-control isRequired" value="">
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="precio">Precio:</label>
+                  <input type="text" name="precio" id="precio" class="form-control isRequired isNumber" value="">
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="inicio">Hora inicio:</label>
+                  <input type="text" name="inicio" id="inicio" class="form-control isRequired" value="">
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="form-group">
+                  <label for="fin">Hora fin:</label>
+                  <input type="text" name="fin" id="fin" class="form-control isRequired" value="">
+                </div>
+              </div>
+            </div>
+            <input type="hidden" name="id_quinta" id="id_quinta_horario" value="">
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">CERRAR</button>
+        <a class="btn btn-primary bs onEdicion cw">Agregar</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal Agregar Horario Quinta -->
 <style media="screen">
   .card-block{background-color: #fbfbfb;}
   .profile-pic, .profile-info{background-color: white;}
@@ -281,7 +338,12 @@ $(document).ready(function(){
 
   $('.openEdicion').click(function(){
     var id = $(this).data('id');
-    $('#id_quinta').val(id);
+    $('#id_quinta_edicion').val(id);
+  })
+
+  $('.openHorario').click(function(){
+    var id = $(this).data('id');
+    $('#id_quinta_horario').val(id);
   })
 })
 </script>

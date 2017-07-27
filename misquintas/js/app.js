@@ -65,6 +65,7 @@ Cliente = {
     edicion: function () {
         var _self = this;
         var info = DAO.toObject($("#frmEdicion").serializeArray());
+        console.log(info);
         if (!_self.validate("#frmEdicion")) {swal('', 'Por favor llena los campos marcados', 'error');return false;};
         DAO.execute("../_ctrl/ctrl.quinta.php", {
                 exec: "edicion",

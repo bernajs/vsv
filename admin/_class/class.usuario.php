@@ -70,7 +70,7 @@ public function get_data($id = null){
 }
 
 public function get_quintas($id){
-  $query = 'SELECT quinta.id, quinta.nombre, quinta.fotos, quinta.descripcion FROM usuario
+  $query = 'SELECT quinta.id, quinta.status, quinta.nombre, quinta.fotos, quinta.descripcion FROM usuario
   INNER JOIN quinta ON quinta.id_usuario = usuario.id WHERE usuario.id ='.$id;
   return $this->execute($query);
 }
