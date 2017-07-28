@@ -27,6 +27,8 @@ class Quinta extends Helper {
     var $id_quinta;
     var $cambio;
     var $id_modulo;
+    var $menor_precio;
+    var $mayor_precio;
 
     public function __construct(){ $this->sql = new db(); }
 
@@ -101,6 +103,7 @@ class Quinta extends Helper {
                 break;
             case "aprobar":$query = "UPDATE quinta SET status=1 WHERE id=".$this->id;break;
             case "rechazar":$query = "UPDATE quinta SET status=2 WHERE id=".$this->id;break;
+            case "actualizar_precio":$query = "UPDATE quinta SET menor_precio=".$this->menor_precio.", mayor_precio=".$this->mayor_precio." WHERE id=".$this->id;echo $query;break;
             case "aprobar_cambio":$query = "UPDATE cambios SET status=1 WHERE id=".$this->id;break;
             case "rechazar_cambio":$query = "UPDATE cambios SET status=2 WHERE id=".$this->id;break;
             case "destacado":
@@ -132,6 +135,11 @@ public function get_data($id = null){
     if($this->order!=NULL) $query .= " ORDER BY ".$this->order;
     if($this->limit!=NULL) $query .= " LIMIT ".$this->limit;
     return $this->execute($query);
+}
+
+public function get_precios($id){
+  $query = 'SELECT id, menor_precio, mayor_precio FROM quinta WHERE id = '.$id;
+  return $this->execute($query);
 }
 
 public function quintas_pendientes(){
