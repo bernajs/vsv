@@ -52,7 +52,7 @@ Crud = {
 		var formData = Dao.toObject($($(e.target).data("form")).serializeArray());
 		var action = $(e.target).data("action");
 		var src = $(e.target).data("src");
-		if (!_self.validate($(e.target).data("form"))) { return false; };
+		if (!_self.validate($(e.target).data("form"))) { alert('Por favor llena los campos marcados');return false; };
 		Dao.execute(src,
 			{
 				exec: action,
@@ -224,31 +224,11 @@ Crud = {
 				}
 			});
 	},
-	invoice: function (e) {
-		_self = this;
-		var el;
-		if (e.target.tagName.toLowerCase() == "i") { el = $(e.target).parent(); } else { el = $(e.target); }
-		var id = el.data("id");
-		var src = el.data("src");
-		Dao.execute(src,
-			{
-				exec: "invoice",
-				data: { id: id }
-			},
-			function (r) {
-				if (r.status == 202) {
-					alert("Invoice generated successfully,");
-					location.reload();
-				} else if (r.status == 500) {
-					alert("Something went wrong, please try agan.");
-				}
-			});
-	},
 	validate: function (form) {
 		var flag = true;
 		$(form + " .isRequired").each(function (index) {
 			if ($(this).val() == "" || $(this).val() == "NULL" || $(this).val() == null) {
-				$(this).addClass("invalid");
+				$(this).parent().addClass("has-danger");
 				flag = false;
 			}
 		});

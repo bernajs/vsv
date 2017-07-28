@@ -111,7 +111,7 @@ if(isset($_GET['id'])){
                   <?php if(!$data['id_usuario']): ?>
                   <div class="form-group col-6">
                     <label for="dueno">Dueño</label>
-                    <input type="text" id="dueno" name="dueno" class="form-control" placeholder="Ingresa el correo del dueño de la Quinta">
+                    <input type="text" id="dueno" name="dueno" class="form-control isRequired" placeholder="Ingresa el correo del dueño de la Quinta">
                   </div>
                   <div class="form-group col-3">
                     <button type="button" name="button" class="btn btn-primary onBuscarDueno" style="margin-top:27.78px;">Buscar</button>
@@ -120,11 +120,11 @@ if(isset($_GET['id'])){
                   <form id="frmQuinta" name="frmQuinta">
                   <div class="form-group col-12">
                     <label for="nombre">Nombre</label>
-                    <input type="text" id="nombre" name="nombre" class="form-control" value="<?php echo $data['nombre']; ?>">
+                    <input type="text" id="nombre" name="nombre" class="form-control isRequired" value="<?php echo $data['nombre']; ?>">
                   </div>
                   <div class="form-group col-6">
                     <label for="estado">Estado</label>
-                    <select name="estado" id="estado" class="form-control">
+                    <select name="estado" id="estado" class="form-control isRequired">
                       <option <?php if($data['estado']=='' ){echo "selected";} ?> value=""></option>
                       <option <?php if($data['estado']=='Aguascalientes' ){echo "selected";} ?> value="Aguascalientes">Aguascalientes</option>
                       <option <?php if($data['estado']=='Baja California' ){echo "selected";} ?> value="Baja California">Baja California</option>
@@ -162,56 +162,56 @@ if(isset($_GET['id'])){
                   </div>
                   <div class="form-group col-6">
                     <label for="municipio">Municipio</label>
-                    <input type="text" id="municipio" name="municipio" class="form-control" value="<?php echo $data['municipio']; ?>">
+                    <input type="text" id="municipio" name="municipio" class="form-control isRequired" value="<?php echo $data['municipio']; ?>">
                   </div>
                   <div class="form-group col-6">
                     <label for="zona">Zona</label>
-                    <input type="text" id="zona" name="zona" class="form-control" value="<?php echo $data['zona']; ?>">
+                    <input type="text" id="zona" name="zona" class="form-control isRequired" value="<?php echo $data['zona']; ?>">
                   </div>
                   <div class="form-group col-6">
                     <label for="ciudad">Ciudad</label>
-                    <input type="text" id="ciudad" name="ciudad" class="form-control" value="<?php echo $data['ciudad']; ?>">
+                    <input type="text" id="ciudad" name="ciudad" class="form-control isRequired" value="<?php echo $data['ciudad']; ?>">
                   </div>
                   <div class="form-group col-3">
                     <label for="lat">Latitud</label>
-                    <input type="text" id="lat" name="lat" class="form-control" value="<?php echo $data['lat']; ?>">
+                    <input type="text" id="lat" name="lat" class="form-control isRequired" value="<?php echo $data['lat']; ?>">
                   </div>
                   <div class="form-group col-3">
                     <label for="lng">Longitud</label>
-                    <input type="text" id="lng" name="lng" class="form-control" value="<?php echo $data['lng']; ?>">
+                    <input type="text" id="lng" name="lng" class="form-control isRequired" value="<?php echo $data['lng']; ?>">
                   </div>
                   <div class="form-group col-6">
                     <label for="capacidad">Capacidad</label>
-                    <input type="text" id="capacidad" name="capacidad" class="form-control" value="<?php echo $data['capacidad']; ?>">
+                    <input type="text" id="capacidad" name="capacidad" class="form-control isRequired" value="<?php echo $data['capacidad']; ?>">
                   </div>
                   <div class="form-group col-4">
                     <label for="evento">Tipo de evento</label>
-                    <select class="form-control" name="evento" id="evento">
+                    <select class="form-control isRequired" name="evento" id="evento">
                       <option value="1">uno</option>
                       <option value="2">dos</option>
                     </select>
                   </div>
                   <div class="form-group col-4">
                     <label for="status">Destacado</label>
-                    <select class="form-control" name="destacado" id="destacado">
+                    <select class="form-control isRequired" name="destacado" id="destacado">
                       <option value="0" <?php if($data['destacado'] == 0) echo 'selected'; ?>>No destacado</option>
                       <option value="1" <?php if($data['destacado'] == 1) echo 'selected'; ?>>Destacado</option>
                     </select>
                   </div>
                   <div class="form-group col-4">
                     <label for="status">Estado (Activa/inactiva)</label>
-                    <select class="form-control" name="status" id="status">
+                    <select class="form-control isRequired" name="status" id="status">
                       <option value="0" <?php if($data['status'] == 0) echo 'selected'; ?>>Inactivo</option>
                       <option value="1" <?php if($data['status'] == 1) echo 'selected'; ?>>Activo</option>
                     </select>
                   </div>
                   <div class="form-group col-6">
                     <label for="descripcion">Descripción</label>
-                    <textarea name="descripcion" id="descripcion" rows="8" cols="50" class="form-control"><?php echo $data['descripcion'];?></textarea>
+                    <textarea name="descripcion" id="descripcion" rows="8" cols="50" class="form-control isRequired"><?php echo $data['descripcion'];?></textarea>
                   </div>
                   <div class="form-group col-6">
                     <label for="videos">Vídeos</label>
-                    <input type="text" id="videos" name="videos" class="form-control" value="<?php echo $data['videos']; ?>">
+                    <input type="text" id="videos" name="videos" class="form-control isRequired" value="<?php echo $data['videos']; ?>">
                   </div>
                   <div class="col-12">
                     <h4>Servicios</h4>

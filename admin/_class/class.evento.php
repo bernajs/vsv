@@ -2,13 +2,8 @@
 
 require_once("class.helper.php");
 
-class Horario extends Helper {
-    var $quinta;
+class Evento extends Helper {
     var $nombre;
-    var $descripcion;
-    var $inicio;
-    var $fin;
-    var $precio;
     var $created_at;
     var $modified_at;
     var $status;
@@ -19,27 +14,22 @@ class Horario extends Helper {
     public function db($key){
         switch($key){
             case "insert":
-                $query = "INSERT INTO horario (quinta,nombre,descripcion,inicio,fin,created_at)
+                $query = "INSERT INTO evento (nombre,status,created_at)
                 VALUES (
-                '".$this->quinta."',
                 '".$this->nombre."',
-                '".$this->descripcion."',
-                '".$this->inicio."',
-                '".$this->fin."',
+                '".$this->status."',
                 '".$this->created_at."'
                 )";
                 break;
             case "update":
-                $query = "UPDATE horario
+                $query = "UPDATE evento
                 SET
                 nombre='".$this->nombre."',
-                descripcion='".$this->descripcion."',
-                inicio='".$this->inicio."',
-                fin='".$this->fin."',
+                status='".$this->status."',
                 modified_at='".$this->modified_at."'
                 WHERE id=".$this->id;
                 break;
-            case "delete": $query = "DELETE FROM horario WHERE id=".$this->id;
+            case "delete": $query = "DELETE FROM evento WHERE id=".$this->id;
                 break;
 
     }
@@ -48,8 +38,8 @@ class Horario extends Helper {
     $this->execute($query,$lid);
 }
 
-public function getData($id = null){
-    $query = 'SELECT * FROM horario WHERE id > 0';
+public function get_data($id = null){
+    $query = 'SELECT * FROM evento WHERE id > 0';
     if($id!=NULL) $query.=" AND id=".$id."";
     if($this->status!=NULL) $query .= " AND status=".$this->status;
     if($this->search!=NULL) $query .= " AND ".$this->search_field." LIKE '%".$this->search."%'";
@@ -59,5 +49,10 @@ public function getData($id = null){
 }
 public function getLastInserted(){ return $this->lastInserted; }
 
+public function isDuplicate($nombre){
+  $query = 'SELECT id FROM evento WHERE nombre="'.$nombre.'" LIMIT 1';
+  $result = $this->execute($query);
+  if (count($result)>0) {return true;} else {return false;}
+}
 }
 ?>
