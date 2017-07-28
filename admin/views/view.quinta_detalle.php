@@ -1,5 +1,7 @@
 <?php
 require_once('_class/class.quinta.php');
+require_once('_class/class.evento.php');
+$Quinta = new Evento();
 $Quinta = new Quinta();
 // Variables
 $data['nombre'] = '';
@@ -47,9 +49,9 @@ if(isset($_GET['id'])){
   $title = 'Editando quinta';
 
 
+  // caracteristicas
   $caracteristicas = $Quinta->get_caracteristicas();
   $qcaracteristicas = $Quinta->get_caracteristicas_quinta($id);
-
   $lista_caracteristicas = '';
   foreach ($caracteristicas as $caracteristica) {
     $checked = '';
@@ -59,10 +61,30 @@ if(isset($_GET['id'])){
       }
     }
     $lista_caracteristicas .= '<div class="form-check col-6">
-      <label class="form-check-label">
-        <input type="checkbox" class="form-check-input" '.$checked.' name="caracteristica[]" value="'.$caracteristica['id'].'">
-      '.$caracteristica['nombre'].'
-      </label>
+    <label class="form-check-label">
+    <input type="checkbox" class="form-check-input" '.$checked.' name="caracteristica[]" value="'.$caracteristica['id'].'">
+    '.$caracteristica['nombre'].'
+    </label>
+    </div>';
+  }
+
+  // Eventos
+  $qeventos = $Quinta->get_eventos_quinta($id);
+  $eventos = $Quinta->get_eventos();
+  $lista_eventos = '';
+
+  foreach ($eventos as $evento) {
+    $checked = '';
+    foreach ($qeventos as $qevento) {
+      if($qevento['id'] == $evento['id']){
+        $checked = 'checked';
+      }
+    }
+    $lista_eventos .= '<div class="form-check col-6">
+    <label class="form-check-label">
+    <input type="checkbox" class="form-check-input" '.$checked.' name="evento[]" value="'.$evento['id'].'">
+    '.$evento['nombre'].'
+    </label>
     </div>';
   }
 
@@ -78,8 +100,19 @@ if(isset($_GET['id'])){
     $checked = '';
     $lista_caracteristicas .= '<div class="form-check col-6">
       <label class="form-check-label">
-        <input type="checkbox" class="form-check-input" '.$checked.' name="caracteristica[]" value="'.$caracteristica['id'].'">
+        <input type="checkbox" class="form-check-input" name="caracteristica[]" value="'.$caracteristica['id'].'">
       '.$caracteristica['nombre'].'
+      </label>
+    </div>';
+  }
+
+  $eventos = $Quinta->get_eventos();
+  $lista_eventos = '';
+  foreach ($eventos as $evento) {
+    $lista_eventos .= '<div class="form-check col-6">
+      <label class="form-check-label">
+        <input type="checkbox" class="form-check-input" name="evento[]" value="'.$evento['id'].'">
+      '.$evento['nombre'].'
       </label>
     </div>';
   }
@@ -172,38 +205,50 @@ if(isset($_GET['id'])){
                     <label for="ciudad">Ciudad</label>
                     <input type="text" id="ciudad" name="ciudad" class="form-control isRequired" value="<?php echo $data['ciudad']; ?>">
                   </div>
-                  <div class="form-group col-3">
+                  <div class="form-group col-2">
                     <label for="lat">Latitud</label>
                     <input type="text" id="lat" name="lat" class="form-control isRequired" value="<?php echo $data['lat']; ?>">
                   </div>
-                  <div class="form-group col-3">
+                  <div class="form-group col-2">
                     <label for="lng">Longitud</label>
                     <input type="text" id="lng" name="lng" class="form-control isRequired" value="<?php echo $data['lng']; ?>">
                   </div>
-                  <div class="form-group col-6">
+                  <div class="form-group col-2">
                     <label for="capacidad">Capacidad</label>
                     <input type="text" id="capacidad" name="capacidad" class="form-control isRequired" value="<?php echo $data['capacidad']; ?>">
                   </div>
-                  <div class="form-group col-4">
+                  <!-- <div class="form-group col-4">
                     <label for="evento">Tipo de evento</label>
                     <select class="form-control isRequired" name="evento" id="evento">
                       <option value="1">uno</option>
                       <option value="2">dos</option>
                     </select>
-                  </div>
-                  <div class="form-group col-4">
+                  </div> -->
+                  <div class="form-group col-3">
                     <label for="status">Destacado</label>
                     <select class="form-control isRequired" name="destacado" id="destacado">
                       <option value="0" <?php if($data['destacado'] == 0) echo 'selected'; ?>>No destacado</option>
                       <option value="1" <?php if($data['destacado'] == 1) echo 'selected'; ?>>Destacado</option>
                     </select>
                   </div>
-                  <div class="form-group col-4">
+                  <div class="form-group col-3">
                     <label for="status">Estado (Activa/inactiva)</label>
                     <select class="form-control isRequired" name="status" id="status">
                       <option value="0" <?php if($data['status'] == 0) echo 'selected'; ?>>Inactivo</option>
                       <option value="1" <?php if($data['status'] == 1) echo 'selected'; ?>>Activo</option>
                     </select>
+                  </div>
+                  <div class="col-12">
+                    <h4>Caracteristicas</h4>
+                    <div class="row p-10 caracteristicas">
+                      <?php echo $lista_caracteristicas; ?>
+                    </div>
+                  </div>
+                  <div class="col-12 my-2">
+                    <h4>Eventos</h4>
+                    <div class="row p-10 eventos">
+                      <?php echo $lista_eventos; ?>
+                    </div>
                   </div>
                   <div class="form-group col-6">
                     <label for="descripcion">Descripción</label>
@@ -212,12 +257,6 @@ if(isset($_GET['id'])){
                   <div class="form-group col-6">
                     <label for="videos">Vídeos</label>
                     <input type="text" id="videos" name="videos" class="form-control isRequired" value="<?php echo $data['videos']; ?>">
-                  </div>
-                  <div class="col-12">
-                    <h4>Servicios</h4>
-                    <div class="row p-10 caracteristicas">
-                      <?php echo $lista_caracteristicas; ?>
-                    </div>
                   </div>
                   <input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
                   <input type="hidden" name="fotos[]" id="fotos">
@@ -280,7 +319,7 @@ if(isset($_GET['id'])){
 <style media="screen">
   .card{border: 1px solid #ccd6e6;}
   .card-img-top{height: 150px; width:150px;}
-  .caracteristicas{
+  .caracteristicas, .eventos{
     border: 1px solid #ccd6e6;
     border-radius: 5px;
     margin-right: 2.5px;

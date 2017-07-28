@@ -31,7 +31,9 @@ case "save":
         $result['status'] = 202;
         $id = $obj->getLastInserted();
         if(isset($data['caracteristica['])) $caracteristicas = $data['caracteristica[']; else $caracteristicas = '';
-        insert_caracteristicas($id, $caracteristicas, $obj);
+        insert_checkbox($id, $caracteristicas,'caracteristica', $obj);
+        if(isset($data['evento['])) $eventos = $data['evento[']; else $eventos = '';
+        insert_checkbox($id, $eventos,'evento', $obj);
         $result['redirect'] = 'index.php?call=quinta_detalle&id='.$id;
         echo json_encode($result);
 }else{
@@ -62,7 +64,9 @@ case "update":
     set_id($data['id'])->
     db('update');
     if(isset($data['caracteristica['])) $caracteristicas = $data['caracteristica[']; else $caracteristicas = '';
-    insert_caracteristicas($data['id'], $caracteristicas, $obj);
+    insert_checkbox($data['id'], $caracteristicas,'caracteristica', $obj);
+    if(isset($data['evento['])) $eventos = $data['evento[']; else $eventos = '';
+    insert_checkbox($data['id'], $eventos,'evento', $obj);
     $result['status'] = 202;
     echo json_encode($result);
     break;
@@ -124,12 +128,12 @@ function fotos_to_array($fotos){
   $fotos = explode(',', $fotos);
   return json_encode($fotos);
 }
-function insert_caracteristicas($id, $caracteristicas, $obj){
-  $caracteristicas = explode('|', $caracteristicas);
+function insert_checkbox($id, $data, $modulo, $obj){
+  $data = explode('|', $data);
 
-  if($id){$obj->set_id($id)->db('delete_caracteristica');}
-  foreach ($caracteristicas as $caracteristica) {
-    if($caracteristica) $obj->set_id($id)->set_id_caracteristica($caracteristica)->set_created_at(date("Y-m-d H:i:s"))->db('insert_caracteristica');
+  if($id){$obj->set_id($id)->db('delete_'.$modulo);}
+  foreach ($data as $registro) {
+    if($registro) $obj->set_id($id)->set_id_modulo($registro)->set_created_at(date("Y-m-d H:i:s"))->db('insert_'.$modulo);
   }
 }
 ?>

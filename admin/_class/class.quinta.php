@@ -26,6 +26,7 @@ class Quinta extends Helper {
     var $id_caracteristica;
     var $id_quinta;
     var $cambio;
+    var $id_modulo;
 
     public function __construct(){ $this->sql = new db(); }
 
@@ -77,7 +78,15 @@ class Quinta extends Helper {
                     $query = "INSERT INTO quinta_caracteristica(id_quinta, id_caracteristica, created_at)
                     VALUES(
                       '".$this->id."',
-                      '".$this->id_caracteristica."',
+                      '".$this->id_modulo."',
+                      '".$this->created_at."'
+                    )";
+                break;
+                case "insert_evento":
+                    $query = "INSERT INTO quinta_evento(id_quinta, id_evento, created_at)
+                    VALUES(
+                      '".$this->id."',
+                      '".$this->id_modulo."',
                       '".$this->created_at."'
                     )";
                 break;
@@ -99,6 +108,8 @@ class Quinta extends Helper {
                 break;
             case "delete_caracteristica": $query = "DELETE FROM quinta_caracteristica WHERE id_quinta=".$this->id;
                 break;
+            case "delete_evento": $query = "DELETE FROM quinta_evento WHERE id_quinta=".$this->id;
+            break;
             case "destacado":
                 $query = "UPDATE quinta SET destacado='".$this->destacado."', modified_at='".$this->modified_at."' WHERE id=".$this->id;
                 break;
@@ -146,6 +157,16 @@ public function get_caracteristicas_quinta($id){
 }
 public function get_caracteristicas(){
   $query = 'SELECT * FROM caracteristica WHERE status = 1';
+  return $this->execute($query);
+}
+
+public function get_eventos_quinta($id){
+  $query = 'SELECT evento.nombre, evento.id FROM evento
+  INNER JOIN quinta_evento ON evento.id = quinta_evento.id_evento WHERE quinta_evento.id_quinta = '.$id;
+  return $this->execute($query);
+}
+public function get_eventos(){
+  $query = 'SELECT * FROM evento WHERE status = 1';
   return $this->execute($query);
 }
 
