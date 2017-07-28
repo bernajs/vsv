@@ -79,42 +79,42 @@
         <form name="frmServicio" id="frmServicio" class="row">
           <div class="form-group col-12">
             <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" class="form-control" value="<?php echo $data['nombre'];?>">
+            <input type="text" id="nombre" name="nombre" class="form-control isRequired" value="<?php echo $data['nombre'];?>">
           </div>
           <div class="form-group col-6">
             <label for="telefono">Teléfono</label>
-            <input type="text" name="telefono" id="telefono" class="form-control" value="<?php echo $data['telefono'];?>">
+            <input type="text" name="telefono" id="telefono" class="form-control isRequired isNumber" value="<?php echo $data['telefono'];?>">
           </div>
           <div class="form-group col-6">
             <label for="correo">Correo</label>
-            <input type="email" name="correo" id="correo" class="form-control" value="<?php echo $data['correo'];?>">
+            <input type="email" name="correo" id="correo" class="form-control isRequired" value="<?php echo $data['correo'];?>">
           </div>
           <div class="form-group col-6">
             <label for="pagina">Página</label>
-            <input type="url" name="pagina" id="pagina" class="form-control" value="<?php echo $data['pagina'];?>">
+            <input type="url" name="pagina" id="pagina" class="form-control isRequired" value="<?php echo $data['pagina'];?>">
           </div>
           <div class="form-group col-6">
             <label for="fb">Facebok</label>
-            <input type="text" name="fb" id="fb" class="form-control" value="<?php echo $data['fb'];?>">
+            <input type="text" name="fb" id="fb" class="form-control isRequired" value="<?php echo $data['fb'];?>">
           </div>
           <div class="form-group col-6">
             <label for="tw">Twitter</label>
-            <input type="text" name="tw" id="tw" class="form-control" value="<?php echo $data['tw'];?>">
+            <input type="text" name="tw" id="tw" class="form-control isRequired" value="<?php echo $data['tw'];?>">
           </div>
           <div class="form-group col-6">
             <label for="ig">Instagram</label>
-            <input type="text" name="ig" id="ig" class="form-control" value="<?php echo $data['ig'];?>">
+            <input type="text" name="ig" id="ig" class="form-control isRequired" value="<?php echo $data['ig'];?>">
           </div>
           <div class="form-group col-6">
             <label for="destacado">Destacado</label>
-            <select class="form-control" name="destacado" id="destacado">
+            <select class="form-control isRequired" name="destacado" id="destacado">
               <option value="0" <?php if($data['destacado'] == 0) echo 'selected'; ?>>No destacado</option>
               <option value="1" <?php if($data['destacado'] == 1) echo 'selected'; ?>>Destacado</option>
             </select>
           </div>
           <div class="form-group col-6">
             <label for="status">Estado</label>
-            <select class="form-control" name="status" id="status">
+            <select class="form-control isRequired" name="status" id="status">
               <option value="0" <?php if($data['status'] == 0) echo 'selected'; ?>>Inactivo</option>
               <option value="1" <?php if($data['status'] == 1) echo 'selected'; ?>>Activo</option>
             </select>
@@ -128,14 +128,12 @@
               <div class="row p-10 categorias">
                 <?php echo $lista_categorias; ?>
               </div>
-              <?php echo $lista_categorias; ?>
             </div>
             </div>
-          </div>
           </div>
           <div class="form-group col-12">
             <label for="nombre">Descripción</label>
-            <textarea name="descripcion" id="descripcion" rows="8" cols="80" class="form-control"><?php echo $data['descripcion'];?></textarea>
+            <textarea name="descripcion" id="descripcion" rows="8" cols="80" class="form-control isRequired"><?php echo $data['descripcion'];?></textarea>
           </div>
           <div class="col-12">
             <h5>Imágen</h5>
@@ -148,8 +146,8 @@
           <input type="hidden" name="imagen" id="imagen" value="<?php echo $data['imagen']; ?>">
         </form>
       </div>
+      </div>
     </div>
-  </div>
   <div class="modal-footer">
   <button type="a" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar</button>
   <!-- <button type="a" class="btn btn-outline-primary onSave" data-form="#frmServicio" data-src="servicio" data-action="<?php echo $action; ?>">Guardar</button> -->
@@ -175,7 +173,7 @@
   #save{display: none;}
 </style>
 <script src="js/dropzone.js" charset="utf-8"></script>
-
+<script src="js/validations.js"></script>
 <script type="text/javascript">
 set_data("servicio", "servicio");
 <?php if($data['imagen']): ?>

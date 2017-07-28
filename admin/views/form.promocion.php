@@ -32,11 +32,11 @@
         <form name="frmPromocion" id="frmPromocion" class="row">
           <div class="form-group col-12">
             <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" class="form-control" value="<?php echo $data['nombre'];?>">
+            <input type="text" id="nombre" name="nombre" class="form-control isRequired" value="<?php echo $data['nombre'];?>">
           </div>
           <div class="form-group col-12">
             <label for="url">Url</label>
-            <input type="text" id="url" name="url" class="form-control" value="<?php echo $data['url'];?>">
+            <input type="text" id="url" name="url" class="form-control isRequired" value="<?php echo $data['url'];?>">
           </div>
           <div class="form-group col-6">
             <label for="target">Target</label>
@@ -71,6 +71,7 @@
 </div>
 
 <script src="assets/js/dropzone.js"></script>
+<script src="js/validations.js"></script>
 <link rel="stylesheet" href="assets/css/dropzone.css">
 <style media="screen">
   .imagen{text-align: center;}

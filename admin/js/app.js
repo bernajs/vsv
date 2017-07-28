@@ -16,6 +16,8 @@ Crud = {
 		$(document).on("click", "button.onClickApprove", function (e) { _self.approve(e); });
 		$(document).on("click", "button.onBuscarDueno", function (e) { _self.get_dueno(e); });
 		$(document).on("click", "a.onDestacado", function (e) { _self.destacado(e); });
+		$('.isRequired').on('keyup', (function () {$(this).parent().removeClass('has-danger');}));
+		$('.isNumber').keyup(function () { this.value = this.value.replace(/[^0-9\.]/g, ''); });
 	},
 	cambio: function (e) {
 		var id = $(e.target).data("id");

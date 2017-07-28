@@ -215,7 +215,7 @@ if(isset($_GET['id'])){
                   </div>
                   <div class="form-group col-2">
                     <label for="capacidad">Capacidad</label>
-                    <input type="text" id="capacidad" name="capacidad" class="form-control isRequired" value="<?php echo $data['capacidad']; ?>">
+                    <input type="text" id="capacidad" name="capacidad" class="form-control isRequired isNumber" value="<?php echo $data['capacidad']; ?>">
                   </div>
                   <!-- <div class="form-group col-4">
                     <label for="evento">Tipo de evento</label>
