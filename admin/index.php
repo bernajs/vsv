@@ -1,4 +1,6 @@
-<?php include_once('../_inc/inc.admin.php'); ?>
+<?php include_once('../_inc/inc.admin.php');
+isset($_GET['call']) ? $active = $_GET['call'] : $active = '';
+?>
 <!DOCTYPE html>
 <html lang="en" data-textdirection="ltr" class="loading">
   <head>
@@ -52,22 +54,22 @@
       <div data-menu="menu-container" class="navbar-container main-menu-content">
         <!-- include ../../../includes/mixins-->
         <ul id="main-menu-navigation" data-menu="menu-navigation" class="nav navbar-nav">
-        <li class="dropdown nav-item"><a href="index.php" class="nav-link"><i class="ft-home"></i><span>Dashboard</span></a></li>
-        <li class="dropdown nav-item"><a href="index.php?call=caracteristica" class="nav-link"><i class="ft-home"></i><span>Características</span></a></li>
-         <li class="dropdown nav-item"><a href="index.php?call=categoria" class="nav-link"><i class="ft-home"></i><span>Categoria</span></a></li>
-         <li class="dropdown nav-item"><a href="index.php?call=promocion" class="nav-link"><i class="ft-home"></i><span>Promociones</span></a></li>
+        <li class="dropdown nav-item <?php if($active == 'dashboard' || $active == '') echo "active";?>"><a href="index.php" class="nav-link"><i class="ft-home"></i><span>Dashboard</span></a></li>
+        <li class="dropdown nav-item <?php if($active == 'caracteristica') echo "active";?>"><a href="index.php?call=caracteristica" class="nav-link"><i class="ft-home"></i><span>Características</span></a></li>
+         <li class="dropdown nav-item <?php if($active == 'categoria') echo "active";?>"><a href="index.php?call=categoria" class="nav-link"><i class="ft-home"></i><span>Categoria</span></a></li>
+         <li class="dropdown nav-item <?php if($active == 'promocion') echo "active";?>"><a href="index.php?call=promocion" class="nav-link"><i class="ft-home"></i><span>Promociones</span></a></li>
          <li data-menu="dropdown" class="dropdown nav-item"><a href="index.php?call=quinta" data-toggle="dropdown" class="nav-link"><i class="ft-home"></i><span>Quintas</span></a>
            <ul class="dropdown-menu">
-             <li data-menu="" class="active"><a href="index.php?call=quinta" data-toggle="dropdown" class="dropdown-item">Todas</a>
+             <li data-menu="" class="<?php if($active == 'quinta' || $active == 'quinta_detalle') echo "active";?>"><a href="index.php?call=quinta" data-toggle="dropdown" class="dropdown-item">Todas</a>
              </li>
-             <li data-menu="" class="active"><a href="index.php?call=quinta&pendiente=true" data-toggle="dropdown" class="dropdown-item">Pendientes</a>
+             <li data-menu="" class=""><a href="index.php?call=quinta&pendiente=true" data-toggle="dropdown" class="dropdown-item">Pendientes</a>
              </li>
            </ul>
          </li>
-         <li class="dropdown nav-item"><a href="index.php?call=servicio" class="nav-link"><i class="ft-home"></i><span>Servicios</span></a></li>
+         <li class="dropdown nav-item <?php if($active == 'servicio') echo "active";?>"><a href="index.php?call=servicio" class="nav-link"><i class="ft-home"></i><span>Servicios</span></a></li>
          <!-- <li class="dropdown nav-item"><a href="index.php?call=quinta" class="nav-link"><i class="ft-home"></i><span>Quintas</span></a></li> -->
-         <li class="dropdown nav-item"><a href="index.php?call=staff" class="nav-link"><i class="ft-home"></i><span>Staff</span></a></li>
-         <li class="dropdown nav-item"><a href="index.php?call=usuario" class="nav-link"><i class="ft-home"></i><span>Usuarios</span></a></li>
+         <li class="dropdown nav-item <?php if($active == 'staff') echo "active";?>"><a href="index.php?call=staff" class="nav-link"><i class="ft-home"></i><span>Staff</span></a></li>
+         <li class="dropdown nav-item <?php if($active == 'usuario' || $active == "usuario_detalle") echo "active";?>"><a href="index.php?call=usuario" class="nav-link"><i class="ft-home"></i><span>Usuarios</span></a></li>
         </ul>
       </div>
       <!-- /horizontal menu content-->
