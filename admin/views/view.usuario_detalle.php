@@ -80,11 +80,11 @@ if(isset($_GET['id'])){
                   </div>
                   <div class="form-group col-3">
                     <label for="celular">Celular</label>
-                    <input type="text" id="celular" name="celular" class="form-control isRequired isNumber" value="<?php echo $data['celular']; ?>">
+                    <input type="text" id="celular" name="celular" class="form-control isRequired isNumber isHora" value="<?php echo $data['celular']; ?>">
                   </div>
                   <div class="form-group col-3">
-                    <label for="telefono">Telefono</label>
-                    <input type="text" id="telefono" name="telefono" class="form-control isRequired isNumber" value="<?php echo $data['telefono']; ?>">
+                    <label for="telefono">Teléfono</label>
+                    <input type="text" id="telefono" name="telefono" class="form-control isRequired isNumber isTelefono" value="<?php echo $data['telefono']; ?>">
                   </div>
                   <div class="form-group col-3">
                     <label for="tipo">Tipo de usuario</label>
@@ -129,3 +129,8 @@ if(isset($_GET['id'])){
 <style media="screen">
 
 </style>
+<script type="text/javascript">
+$(document).ready(function(){
+
+})
+</script>

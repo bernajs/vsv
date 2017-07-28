@@ -85,7 +85,7 @@ if(isset($_GET['id'])){
     </label>
     </div>';
   }
-
+  // Cambio en quinta
   if(isset($_GET['cambio'])){
     $id_cambio = $_GET['cambio'];
     $cambio = $Quinta->cambios_pendientes($id_cambio, $id);
@@ -119,7 +119,7 @@ if(isset($_GET['id'])){
 
 <div class="card">
   <div class="card-header pb-0">
-    <h4 class="card-title"><?php echo $title; ?></h4>
+    <h4 class="card-title mb-2" style="display:block !important;"><?php echo $title; ?></h4>
     <?php if($id && $data['status'] == 0): ?>
       <div class="row">
       <button type="button" data-id="<?php echo $id; ?>" data-action="aprobar" class="btn btn-outline-primary mt-1 onQuinta">Aprobar Quinta</button>
@@ -132,10 +132,22 @@ if(isset($_GET['id'])){
       </div>
     </div>
   </div>
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#quinta" role="tab">Quinta</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#horario" role="tab">Horarios</a>
+    </li>
+  </ul>
+  <!-- <div class="tab-content"> -->
   <div class="card-body collapse in">
     <div class="card-block">
       <div class="tab-content px-1 pt-1">
-        <div role="tabpanel" class="tab-pane active" id="datos-content" aria-expanded="true" aria-labelledby="datos">
+        <div class="col-12 tab-pane" id="horario" role="tabpanel">
+          <?php include_once('views/view.horario.php'); ?>
+        </div>
+        <div class="tab-pane active" id="quinta" role="tabpanel">
           <div class="row">
             <div class="col-12">
                 <div class="row">
@@ -290,12 +302,12 @@ if(isset($_GET['id'])){
       </div>
     </div>
   </div>
+  <!-- </div> -->
 </div>
-
 <?php if ($cambio): ?>
 <div class="col-xl-3 col-lg-6 col-xs-12 div-cambio">
             <div class="card bg-primary mb-0">
-              <i class="icon-close white font-large-2 float-xs-right" style="cursor:pointer;"></i>
+              <i class="icon-close white font-large-2 float-xs-right" style="margin:4px 3px 0px 0px;cursor:pointer;"></i>
                 <div class="card-body">
                     <div class="card-block">
                         <div class="media">
@@ -317,12 +329,14 @@ if(isset($_GET['id'])){
 <style media="screen">
   .card{border: 1px solid #ccd6e6;}
   .card-img-top{height: 150px; width:150px;}
-  .caracteristicas, .eventos{
+  .caracteristicas, .eventos, .horarios{
     border: 1px solid #ccd6e6;
     border-radius: 5px;
     margin-right: 2.5px;
     margin-left: 2.5px;
   }
+
+  .horarios a{padding:5px;}
   .div-cambio{
     color:white;position:fixed;top:113px;right:30px;width:350px;
   }

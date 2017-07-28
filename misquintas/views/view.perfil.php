@@ -31,7 +31,6 @@
         '.$btn_edicion.'
         <a href="../index.php?call=quinta&id='.$quinta['id'].'" target="_blank" class="ct"> Vista previa <span class="clg"> | </span></a>
         <a class="ct onResena" data-id="'.$quinta['id'].'"> Reseñas</a>
-        <a class="ct openHorario" data-toggle="modal" data-target="#modalHorario" data-id="'.$quinta['id'].'">Agregar horario</a>
       </div>
       </div>
       ';

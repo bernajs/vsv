@@ -8,12 +8,13 @@ switch($_POST['exec']) {
 case "save":
     $data = $_POST['data'];
     // if(!$obj->isDuplicate($data['nombre'])){
+    echo $precio;
         $obj->set_id_quinta($data['id_quinta'])->
         set_nombre($data['nombre'])->
         set_descripcion($data['descripcion'])->
-        set_inicio($data['inicio'])->
-        set_fin($data['fin'])->
-        set_precio($data['precio'])->
+        set_precio(replace_dinero($data['precio']))->
+        set_inicio(date('H:i:s', strtotime($data['inicio'])))->
+        set_fin(date('H:i:s', strtotime($data['fin'])))->
         set_created_at(date("Y-m-d H:i:s"))->
         db('insert');
         $result['status'] = 202;
@@ -25,13 +26,13 @@ case "save":
 break;
 case "update":
     $data = $_POST['data'];
-    $obj->set_id_usuario($data['id_usuario'])->
+    $obj->set_id($data['id'])->
+    set_nombre($data['nombre'])->
     set_descripcion($data['descripcion'])->
-    set_inicio($data['inicio'])->
-    set_fin($data['fin'])->
-    set_precio($data['precio'])->
+    set_inicio(date('H:i:s', strtotime($data['inicio'])))->
+    set_fin(date('H:i:s', strtotime($data['fin'])))->
+    set_precio(replace_dinero($data['precio']))->
     set_modified_at(date("Y-m-d H:i:s"))->
-    set_id($data['id'])->
     db('update');
     $result['status'] = 202;
     echo json_encode($result);
@@ -43,4 +44,6 @@ case "delete":
     echo json_encode($result);
     break;
 }
+
+function replace_dinero($subject){return str_replace([',', '$'],'', $subject);}
 ?>

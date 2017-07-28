@@ -170,6 +170,11 @@ public function get_eventos(){
   return $this->execute($query);
 }
 
+public function get_horarios($id){
+  $query = 'SELECT * FROM horario WHERE id_quinta='.$id;
+  return $this->execute($query);
+}
+
 public function isDuplicate($nombre){
     $query = 'SELECT id FROM quinta WHERE nombre="'.$nombre.'" LIMIT 1';
     $result = $this->execute($query);

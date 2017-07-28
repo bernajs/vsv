@@ -121,6 +121,9 @@ isset($_GET['call']) ? $active = $_GET['call'] : $active = '';
     <!-- BEGIN PAGE LEVEL JS-->
     <script type="text/javascript" src="assets/js/scripts/ui/breadcrumbs-with-stats.js"></script>
     <script src="assets/js/scripts/modal/components-modal.js" type="text/javascript"></script>
+    <script src="js/cleave.js" charset="utf-8"></script>
+    <script src="js/cleave-phone-mx.js" charset="utf-8"></script>
+    <script src="js/validations.js" charset="utf-8"></script>
     <script src="js/app.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(document).ready(function(){

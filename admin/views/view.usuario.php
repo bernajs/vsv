@@ -3,6 +3,7 @@
     $Usuario = new Usuario();
     $usuarios = $Usuario->get_data();
     $tbody='';
+    $tipo = array('s'=>'Socio', 'u'=>'Usuario normal');
     if($usuarios){
       foreach ($usuarios as $usuario) {
         $id = $usuario['id'];
@@ -12,7 +13,7 @@
         $tbody .= '<td>'.$usuario['correo'].'</td>';
         $tbody .= '<td>'.$usuario['celular'].'</td>';
         $tbody .= '<td>'.$usuario['telefono'].'</td>';
-        $tbody .= '<td>'.$usuario['tipo'].'</td>';
+        $tbody .= '<td>'.$tipo[$usuario['tipo']].'</td>';
         $tbody .= '<td class="acciones">
         <a href="javascript:void(0)" class="onDelete" data-id="'.$id.'" data-src="usuario"><i class="ft-trash-2"></i></a>
         <a class="onEdit" href="index.php?call=usuario_detalle&id='.$id.'"><i class="ft-edit"></i></a></td>';
