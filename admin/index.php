@@ -53,8 +53,8 @@
         <!-- include ../../../includes/mixins-->
         <ul id="main-menu-navigation" data-menu="menu-navigation" class="nav navbar-nav">
         <li class="dropdown nav-item"><a href="index.php" class="nav-link"><i class="ft-home"></i><span>Dashboard</span></a></li>
+        <li class="dropdown nav-item"><a href="index.php?call=caracteristica" class="nav-link"><i class="ft-home"></i><span>Características</span></a></li>
          <li class="dropdown nav-item"><a href="index.php?call=categoria" class="nav-link"><i class="ft-home"></i><span>Categoria</span></a></li>
-         <li class="dropdown nav-item"><a href="index.php?call=caracteristica" class="nav-link"><i class="ft-home"></i><span>Características</span></a></li>
          <li class="dropdown nav-item"><a href="index.php?call=promocion" class="nav-link"><i class="ft-home"></i><span>Promociones</span></a></li>
          <li data-menu="dropdown" class="dropdown nav-item"><a href="index.php?call=quinta" data-toggle="dropdown" class="nav-link"><i class="ft-home"></i><span>Quintas</span></a>
            <ul class="dropdown-menu">
@@ -64,15 +64,15 @@
              </li>
            </ul>
          </li>
-         <!-- <li class="dropdown nav-item"><a href="index.php?call=quinta" class="nav-link"><i class="ft-home"></i><span>Quintas</span></a></li> -->
          <li class="dropdown nav-item"><a href="index.php?call=servicio" class="nav-link"><i class="ft-home"></i><span>Servicios</span></a></li>
-         <li class="dropdown nav-item"><a href="index.php" class="nav-link"><i class="ft-home"></i><span>Staff</span></a></li>
+         <!-- <li class="dropdown nav-item"><a href="index.php?call=quinta" class="nav-link"><i class="ft-home"></i><span>Quintas</span></a></li> -->
+         <li class="dropdown nav-item"><a href="index.php?call=staff" class="nav-link"><i class="ft-home"></i><span>Staff</span></a></li>
+         <li class="dropdown nav-item"><a href="index.php?call=usuario" class="nav-link"><i class="ft-home"></i><span>Usuarios</span></a></li>
         </ul>
       </div>
       <!-- /horizontal menu content-->
     </div>
     <!-- Horizontal navigation-->
-
     <div class="app-content content container-fluid">
       <div class="content-wrapper">
         <div class="content-header row">
@@ -85,7 +85,6 @@
         include('views/view.dashboard.php');
         }
         ?>
-
         <div class="modal fade text-xs-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-container container">
@@ -99,7 +98,7 @@
 
 
     <footer class="footer footer-static footer-light navbar-shadow">
-      <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  &copy; 2017 <a href="https://themeforest.net/user/pixinvent/portfolio?ref=pixinvent" target="_blank" class="text-bold-800 grey darken-2">PIXINVENT </a>, All rights reserved. </span><span class="float-md-right d-xs-block d-md-inline-block">Hand-crafted & Made with <i class="ft-heart pink"></i></span></p>
+      <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2"><span class="float-md-left d-xs-block d-md-inline-block">Copyright  &copy; 2017 <a href="https://mobkii.net" target="_blank" class="text-bold-800 grey darken-2">MOBKII </a>, All rights reserved. </span><span class="float-md-right d-xs-block d-md-inline-block">Hand-crafted & Made with <i class="ft-heart pink"></i></span></p>
     </footer>
 
     <!-- BEGIN VENDOR JS-->

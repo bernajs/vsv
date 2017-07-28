@@ -14,6 +14,7 @@ class Usuario extends Helper {
     var $created_at;
     var $modified_at;
     var $id;
+    var $tipo;
     var $id_quinta;
 
     public function __construct(){ $this->sql = new db(); }
@@ -21,7 +22,7 @@ class Usuario extends Helper {
     public function db($key){
         switch($key){
             case "insert":
-                $query = "INSERT INTO usuario (nombre,apellido,correo,telefono,celular,contrasena,observaciones,status,created_at)
+                $query = "INSERT INTO usuario (nombre,apellido,correo,telefono,celular,contrasena,observaciones,tipo,status,created_at)
                 VALUES (
                 '".$this->nombre."',
                 '".$this->apellido."',
@@ -30,6 +31,7 @@ class Usuario extends Helper {
                 '".$this->celular."',
                 '".$this->contrasena."',
                 '".$this->observaciones."',
+                '".$this->tipo."',
                 '".$this->status."',
                 '".$this->created_at."'
                 )";
@@ -51,6 +53,7 @@ class Usuario extends Helper {
                 telefono='".$this->telefono."',
                 celular='".$this->celular."',
                 contrasena='".$this->contrasena."',
+                tipo='".$this->tipo."',
                 observaciones='".$this->observaciones."',
                 status='".$this->status."',
                 modified_at='".$this->modified_at."'
@@ -65,7 +68,8 @@ class Usuario extends Helper {
 }
 
 public function get_data($id = null){
-    $query = 'SELECT * FROM usuario WHERE status = 1 AND id = '.$id;
+    $query = 'SELECT * FROM usuario WHERE status = 1';
+    if($id){$query.= ' AND id = '.$id;}
     return $this->execute($query);
 }
 

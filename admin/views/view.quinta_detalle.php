@@ -1,7 +1,5 @@
 <?php
 require_once('_class/class.quinta.php');
-require_once('_class/class.evento.php');
-$Quinta = new Evento();
 $Quinta = new Quinta();
 // Variables
 $data['nombre'] = '';
