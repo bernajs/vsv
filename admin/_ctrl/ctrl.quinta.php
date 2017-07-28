@@ -98,11 +98,11 @@ case "rechazar_cambio":
 break;
 case "get_dueno":
     $data = $_POST['data'];
-    $dueno = $obj->get_dueno($data['id']);
+    $dueno = $obj->get_dueno($data['correo']);
     $nombre = $dueno[0]['nombre'] . ' '. $dueno[0]['apellido'];
     if ($dueno) {$result['status'] = 202; $result['dueno'] = $nombre; $result['id'] = $dueno[0]['id'];} else {$result['status'] = 404;}
     echo json_encode($result);
-    break;
+break;
 case "destacado":
     $data = $_POST['data'];
     $destacado = $data['destacado'];
@@ -110,7 +110,7 @@ case "destacado":
     $obj->set_id($data['id'])->set_destacado($destacado)->set_modified_at(date("Y-m-d H:i:s"))->db('destacado');
     $result['status'] = 202;
     echo json_encode($result);
-    break;
+break;
 }
 function direccion_to_json($data){
   return array('calle'=>$data['calle'],

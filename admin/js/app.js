@@ -114,22 +114,20 @@ Crud = {
 			});
 	},
 	get_dueno: function (e) {
-		_self = this;
-		var el;
-		var id = $('#dueno').val();
-		!id ? alert('Debes ingresar un id') : true;
+		var correo = $('#dueno').val();
+		!correo ? alert('Debes ingresar un correo') : true;
 		Dao.execute('quinta',
 			{
 				exec: "get_dueno",
-				data: { 'id': id }
+				data: { 'correo': correo }
 			},
 			function (r) {
 				if (r.status == 202) {
-					$('#dueno').val(r.dueno);
+					$('#dueno').val(correo);
 					$('#id_usuario').val(r.id);
-					// location.reload();
-				} else if (r.status == 500) {
-					alert("Algo sucedio mal, por favor vuelva a intentarlo.");
+					alert('El usuario encontado con el correo ' + correo +' es '+r.dueno);
+				} else if (r.status == 404) {
+					alert("No se encontró ningun usuario con el correo ingresado.");
 				}
 			});
 	},

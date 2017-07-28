@@ -111,7 +111,7 @@ if(isset($_GET['id'])){
                   <?php if(!$data['id_usuario']): ?>
                   <div class="form-group col-6">
                     <label for="dueno">Dueño</label>
-                    <input type="text" id="dueno" name="dueno" class="form-control">
+                    <input type="text" id="dueno" name="dueno" class="form-control" placeholder="Ingresa el correo del dueño de la Quinta">
                   </div>
                   <div class="form-group col-3">
                     <button type="button" name="button" class="btn btn-primary onBuscarDueno" style="margin-top:27.78px;">Buscar</button>

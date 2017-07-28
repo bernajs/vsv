@@ -32,8 +32,7 @@ if($pendientes){foreach ($pendientes as $key => $pendiente) {
     <div class="navbar-header">
       <ul class="nav navbar-nav">
         <li class="nav-item mobile-menu hidden-md-up float-xs-left"><a href="#" class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="ft-menu font-large-1"></i></a></li>
-        <li class="nav-item"><a href="index.html" class="navbar-brand"><img alt="stack admin logo" src="assets/images/logo/stack-logo-light.png" class="brand-logo">
-            <h2 class="brand-text">Stack</h2></a></li>
+        <li class="nav-item"><a href="index.html" class="navbar-brand"><img alt="stack admin logo" src="../img/quintear_logo.png" class="brand-logo img-fluid">
         <li class="nav-item hidden-md-up float-xs-right"><a data-toggle="collapse" data-target="#navbar-mobile" class="nav-link open-navbar-container"><i class="fa fa-ellipsis-v"></i></a></li>
       </ul>
     </div>
@@ -103,5 +102,9 @@ if($pendientes){foreach ($pendientes as $key => $pendiente) {
     </div>
   </div>
 </nav>
+
+<style media="screen">
+  /*.brand-logo{width:100% !important;}*/
+</style>
 
 <!-- ////////////////////////////////////////////////////////////////////////////-->

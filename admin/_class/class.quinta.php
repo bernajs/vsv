@@ -134,8 +134,8 @@ public function cambios_pendientes($id=null, $quinta=null){
     return $this->execute($query);
 }
 
-public function get_dueno($id){
-  $query = 'SELECT * FROM usuario WHERE status = 1 AND id = '.$id;
+public function get_dueno($correo){
+  $query = 'SELECT * FROM usuario WHERE status = 1 AND correo = "'.$correo.'"';
   return $this->execute($query);
 }
 
