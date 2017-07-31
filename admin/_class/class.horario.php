@@ -29,7 +29,6 @@ class Horario extends Helper {
                 '".$this->fin."',
                 '".$this->created_at."'
                 )";
-                echo $query;
                 break;
             case "update":
                 $query = "UPDATE horario
@@ -41,7 +40,6 @@ class Horario extends Helper {
                 fin='".$this->fin."',
                 modified_at='".$this->modified_at."'
                 WHERE id=".$this->id;
-                echo $query;
                 break;
             case "delete": $query = "DELETE FROM horario WHERE id=".$this->id;
                 break;

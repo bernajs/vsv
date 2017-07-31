@@ -51,11 +51,10 @@ function check_precios($nuevo_precio,$quinta, $Quinta){
   if($precios){
     $precioChange = false;
     $precios = $precios[0];
-    if($precios['menor_precio'] > $nuevo_precio){$precios['menor_precio'] = $nuevo_precio;$precioChange = true;}
+    if($precios['menor_precio'] > $nuevo_precio || $precios['menor_precio'] == 0){$precios['menor_precio'] = $nuevo_precio;$precioChange = true;}
     if($precios['mayor_precio'] < $nuevo_precio){$precios['mayor_precio'] = $nuevo_precio;$precioChange = true;}
     if($precioChange) $Quinta->set_id($quinta)->set_menor_precio($precios['menor_precio'])->set_mayor_precio($precios['mayor_precio'])->db('actualizar_precio');
   }else{$Quinta->set_id($quinta)->set_menor_precio($nuevo_precio)->set_mayor_precio($nuevo_precio)->db('actualizar_precio');}
   // Si el precio es 0 que actualice
-
 }
 ?>
