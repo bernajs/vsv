@@ -10,7 +10,7 @@ if($horarios){foreach ($horarios as $key => $horario) {
     <td>'.$horario['nombre'].'</td>
     <td>'.$horario['inicio'].'</td>
     <td>'.$horario['fin'].'</td>
-    <td><a href="javascript:void(0)" class="onDelete" data-id="'.$horario['id'].'" data-src="horario"><i class="ft-trash-2"></i></a>
+    <td><a href="javascript:void(0)" class="onDelete" data-id="'.$horario['id'].'" data-quinta="'.$id.'" data-src="horario"><i class="ft-trash-2"></i></a>
     <a class="onEdit onModal" href="views/form.horario.php?id='.$horario['id'].'&quinta='.$id.'"><i class="ft-edit"></i></a></td></tr>';
 }
 }

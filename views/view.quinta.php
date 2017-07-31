@@ -76,21 +76,6 @@ $buffer_subheader = '<div class="row">
       <div class="col-12 my-2">
       <div class="row justify-content-between">
         <?php echo $quinta_caracteristicas; ?>
-      <!-- <div class="col-2 text-center center-text">
-        <img src="http://www.dickson-constant.com/medias/images/catalogue/api/6088-gris-680.jpg" style="height:20px;width:20px;border-radius:50px; background-color:lightgray">
-      </div>
-      <div class="col-2 text-center center-text">
-        <img src="http://www.dickson-constant.com/medias/images/catalogue/api/6088-gris-680.jpg" style="height:20px;width:20px;border-radius:50px; background-color:lightgray">
-      </div>
-      <div class="col-2 text-center center-text">
-        <img src="http://www.dickson-constant.com/medias/images/catalogue/api/6088-gris-680.jpg" style="height:20px;width:20px;border-radius:50px; background-color:lightgray">
-      </div>
-      <div class="col-2 text-center center-text">
-        <img src="http://www.dickson-constant.com/medias/images/catalogue/api/6088-gris-680.jpg" style="height:20px;width:20px;border-radius:50px; background-color:lightgray">
-      </div>
-      <div class="col-2 text-center center-text">
-        <img src="http://www.dickson-constant.com/medias/images/catalogue/api/6088-gris-680.jpg" style="height:20px;width:20px;border-radius:50px; background-color:lightgray">
-      </div> -->
     </div>
     </div>
     <div id="map" class="col-12" style="height:335px;">

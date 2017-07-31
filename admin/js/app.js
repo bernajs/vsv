@@ -79,10 +79,12 @@ Crud = {
 		if (e.target.tagName.toLowerCase() == "i") { el = $(e.target).parent(); } else { el = $(e.target); }
 		var id = el.data("id");
 		var src = el.data("src");
+		var data = { id: id };
+		if(src == 'horario') data.quinta = el.data("quinta");
 		Dao.execute(src,
 			{
 				exec: "delete",
-				data: { id: id }
+				data: data
 			},
 			function (r) {
 				if (r.status == 202) {

@@ -18,7 +18,7 @@ case "save":
     set_fin(date('H:i:s', strtotime($data['fin'])))->
     set_created_at(date("Y-m-d H:i:s"))->
     db('insert');
-    check_precios($precio, $data['id_quinta'], $Quinta);
+    check_precios($data['id_quinta'], $Quinta);
     $result['status'] = 202;
     echo json_encode($result);
 break;
@@ -34,27 +34,36 @@ case "update":
     set_modified_at(date("Y-m-d H:i:s"))->
     db('update');
     $result['status'] = 202;
-    check_precios($precio, $data['id_quinta'], $Quinta);
+    check_precios($data['id_quinta'], $Quinta);
     echo json_encode($result);
     break;
 case "delete":
     $data = $_POST['data'];
     $obj->set_id($data['id'])->db('delete');
+    check_precios($data['quinta'], $Quinta);
     $result['status'] = 202;
     echo json_encode($result);
     break;
 }
 
 function replace_dinero($subject){return str_replace([',', '$'],'', $subject);}
-function check_precios($nuevo_precio,$quinta, $Quinta){
-  $precios = $Quinta->get_precios($quinta);
-  if($precios){
-    $precioChange = false;
-    $precios = $precios[0];
-    if($precios['menor_precio'] > $nuevo_precio || $precios['menor_precio'] == 0){$precios['menor_precio'] = $nuevo_precio;$precioChange = true;}
-    if($precios['mayor_precio'] < $nuevo_precio){$precios['mayor_precio'] = $nuevo_precio;$precioChange = true;}
-    if($precioChange) $Quinta->set_id($quinta)->set_menor_precio($precios['menor_precio'])->set_mayor_precio($precios['mayor_precio'])->db('actualizar_precio');
-  }else{$Quinta->set_id($quinta)->set_menor_precio($nuevo_precio)->set_mayor_precio($nuevo_precio)->db('actualizar_precio');}
-  // Si el precio es 0 que actualice
+// function check_precios($nuevo_precio,$quinta, $Quinta){
+//   $precios = $Quinta->get_precios($quinta);
+//   if($precios){
+//     $precioChange = false;
+//     $precios = $precios[0];
+//     if($precios['menor_precio'] > $nuevo_precio || $precios['menor_precio'] == 0){$precios['menor_precio'] = $nuevo_precio;$precioChange = true;}
+//     if($precios['mayor_precio'] < $nuevo_precio){$precios['mayor_precio'] = $nuevo_precio;$precioChange = true;}
+//     if($precioChange) $Quinta->set_id($quinta)->set_menor_precio($precios['menor_precio'])->set_mayor_precio($precios['mayor_precio'])->db('actualizar_precio');
+//   }else{$Quinta->set_id($quinta)->set_menor_precio($nuevo_precio)->set_mayor_precio($nuevo_precio)->db('actualizar_precio');}
+//   // Si el precio es 0 que actualice
+// }
+
+function check_precios($quinta, $Quinta){
+  $mayor = $Quinta->get_precio($quinta, 'mayor');
+  $menor = $Quinta->get_precio($quinta, 'menor');
+  if(!$menor){$menor[0]['precio'] = 0;}
+  if(!$mayor){$mayor[0]['precio'] = 0;}
+  $Quinta->set_id($quinta)->set_menor_precio($menor[0]['precio'])->set_mayor_precio($mayor[0]['precio'])->db('actualizar_precio');
 }
 ?>

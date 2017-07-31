@@ -142,6 +142,12 @@ public function get_precios($id){
   return $this->execute($query);
 }
 
+public function get_precio($id, $tipo){
+  $query = 'SELECT precio FROM horario WHERE id_quinta = '.$id;
+  $tipo == 'mayor' ? $query .= ' ORDER BY precio ASC LIMIT 1' : $query .= ' ORDER BY precio DESC LIMIT 1';
+  return $this->execute($query);
+}
+
 public function quintas_pendientes(){
     $query = 'SELECT * FROM quinta WHERE status = 0';
     return $this->execute($query);
