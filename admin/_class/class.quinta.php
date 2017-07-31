@@ -29,6 +29,7 @@ class Quinta extends Helper {
     var $id_modulo;
     var $menor_precio;
     var $mayor_precio;
+    var $fecha;
 
     public function __construct(){ $this->sql = new db(); }
 
@@ -101,10 +102,19 @@ class Quinta extends Helper {
                     '".$this->created_at."'
                     )";
                 break;
+            case "crear_registro_reservacion":
+                        $query = "INSERT INTO quinta_reservacion (id_quinta,status,fecha)
+                        VALUES (
+                        '".$this->id_quinta."',
+                        '".$this->status."',
+                        '".$this->fecha."'
+                        )";
+            break;
             case "aprobar":$query = "UPDATE quinta SET status=1 WHERE id=".$this->id;break;
             case "rechazar":$query = "UPDATE quinta SET status=2 WHERE id=".$this->id;break;
-            case "actualizar_precio":$query = "UPDATE quinta SET menor_precio=".$this->menor_precio.", mayor_precio=".$this->mayor_precio." WHERE id=".$this->id;echo $query;break;
+            case "actualizar_precio":$query = "UPDATE quinta SET menor_precio=".$this->menor_precio.", mayor_precio=".$this->mayor_precio." WHERE id=".$this->id;break;
             case "aprobar_cambio":$query = "UPDATE cambios SET status=1 WHERE id=".$this->id;break;
+            case "actualizar_reservaciones":$query = "UPDATE quinta_reservacion SET status=".$this->status." WHERE fecha='".$this->fecha."' AND id_quinta = ".$this->id;break;
             case "rechazar_cambio":$query = "UPDATE cambios SET status=2 WHERE id=".$this->id;break;
             case "destacado":
                 $query = "UPDATE quinta SET destacado='".$this->destacado."', modified_at='".$this->modified_at."' WHERE id=".$this->id;
@@ -135,11 +145,6 @@ public function get_data($id = null){
     if($this->order!=NULL) $query .= " ORDER BY ".$this->order;
     if($this->limit!=NULL) $query .= " LIMIT ".$this->limit;
     return $this->execute($query);
-}
-
-public function get_precios($id){
-  $query = 'SELECT id, menor_precio, mayor_precio FROM quinta WHERE id = '.$id;
-  return $this->execute($query);
 }
 
 public function get_precio($id, $tipo){
@@ -174,6 +179,15 @@ public function get_caracteristicas(){
   return $this->execute($query);
 }
 
+public function get_buscar_quintas($fecha, $evento, $zona){
+  $query = 'SELECT * FROM quinta
+  INNER JOIN quinta_evento ON quinta.id = quinta_evento.id_quinta AND quinta_evento.id_evento = '.$evento.'
+  LEFT JOIN quinta_reservacion ON quinta.id = quinta_reservacion.id_quinta AND quinta_reservacion.fecha ="'.$fecha.'"
+  WHERE quinta_reservacion.status=1 AND quinta.zona = '.$zona;
+  echo $query;
+  return $this->execute($query);
+}
+
 public function get_eventos_quinta($id){
   $query = 'SELECT evento.nombre, evento.id FROM evento
   INNER JOIN quinta_evento ON evento.id = quinta_evento.id_evento WHERE quinta_evento.id_quinta = '.$id;
@@ -186,6 +200,16 @@ public function get_eventos(){
 
 public function get_horarios($id){
   $query = 'SELECT * FROM horario WHERE id_quinta='.$id;
+  return $this->execute($query);
+}
+
+public function get_reservaciones($id, $fecha){
+  $query = 'SELECT * FROM reservacion WHERE id_quinta='.$id. ' AND fecha = "'.$fecha.'"';
+  return $this->execute($query);
+}
+
+public function get_estado_fecha($id, $fecha){
+  $query = 'SELECT * FROM quinta_reservacion WHERE id_quinta='.$id. ' AND fecha = "'.$fecha.'"';
   return $this->execute($query);
 }
 

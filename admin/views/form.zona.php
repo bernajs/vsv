@@ -1,18 +1,18 @@
 <?php
-  require_once('../_class/class.evento.php');
-  $Evento = new Evento();
+  require_once('../_class/class.zona.php');
+  $Zona = new Zona();
   // Variables
   $data['nombre'] = '';
   $data['status'] = '';
-  $titulo = 'Agregar evento';
+  $titulo = 'Agregar zona';
   $action = 'save';
   $id = '';
   if(isset($_GET['id'])){
     $id = $_GET['id'];
-    $evento = $Evento->get_data($id);
-    $data['nombre'] = $evento[0]['nombre'];
-    $data['status'] = $evento[0]['status'];
-    $titulo = 'Editar evento';
+    $zona = $Zona->get_data($id);
+    $data['nombre'] = $zona[0]['nombre'];
+    $data['status'] = $zona[0]['status'];
+    $titulo = 'Editar zona';
     $action = 'update';
 }
  ?>
@@ -26,7 +26,7 @@
   <div class="modal-body">
     <div class="row">
       <div class="col-12">
-        <form name="frmEvento" id="frmEvento" class="row">
+        <form name="frmZona" id="frmZona" class="row">
           <div class="form-group col-12">
             <label for="nombre">Nombre</label>
             <input type="text" id="nombre" name="nombre" class="form-control isRequired" value="<?php echo $data['nombre'];?>">
@@ -45,6 +45,6 @@
   </div>
   <div class="modal-footer">
   <button type="a" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar</button>
-  <button type="a" id="save" class="btn btn-outline-primary onSave" data-form="#frmEvento" data-src="evento" data-action="<?php echo $action; ?>">Guardar</button>
+  <button type="a" id="save" class="btn btn-outline-primary onSave" data-form="#frmZona" data-src="zona" data-action="<?php echo $action; ?>">Guardar</button>
   </div>
 </div>

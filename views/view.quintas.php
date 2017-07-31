@@ -1,41 +1,55 @@
+<?php
+include_once('admin/_class/class.quinta.php');
+include_once('admin/_class/class.evento.php');
+include_once('admin/_class/class.zona.php');
+$Evento = new Evento();
+$Quinta = new Quinta();
+$Zona = new Zona();
+
+$eventos = $Evento->set_status(1)->get_data();
+if($eventos){foreach ($eventos as $key => $evento) {
+  $buffer_eventos .= '<option value="'.$evento['id'].'">'.$evento['nombre'].'</option>';
+}}
+
+$zonas = $Zona->set_status(1)->get_data();
+if($zonas){foreach ($zonas as $key => $zona) {
+  $buffer_zonas .= '<option value="'.$zona['id'].'">'.$zona['nombre'].'</option>';
+}}
+?>
+
 <div class="row my-md-5">
   <div class="col-12 col-md-4 filtro-quinta">
     <div class="row">
       <div class="col-12 bp cw p-4">
-    <form>
+    <form id="frmBuscar">
       <h3 class="text-center">Encuentra tu Quinta</h3>
       <div class="row">
         <div class="col-12">
           <div class="form-group">
             <label for="evento">Evento</label>
             <select class="form-control" id="evento" name="evento">
-              <option value="1">1</option>
-              <option value="1">1</option>
-              <option value="1">1</option>
-              <option value="1">1</option>
-              <option value="1">1</option>
-              <option value="1">1</option>
+              <?php echo $buffer_eventos ?>
             </select>
           </div>
         </div>
-        <div class="col-6">
+        <div class="col-12">
           <div class="form-group">
-            <label for="municipio">Municipio</label>
-            <select class="form-control" id="municipio" name="municipio">
-              <option value="1">1</option>
-              <option value="1">1</option>
-              <option value="1">1</option>
-              <option value="1">1</option>
+            <label for="zona">Zona</label>
+            <select class="form-control" id="zona" name="zona">
+              <?php echo $buffer_zonas; ?>
             </select>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-12">
         <div class="form-group">
-          <label for="fecha">Fecha</label>
-          <input type="datetime" id="fecha" name="fecha" value="" class="form-control">
+          <label>Fecha</label>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+          <input type="datetime" id="fecha" name="fecha" data-toggle="datepicker" value="" class="form-control isRequired" aria-describedby="basic-addon1">
         </div>
       </div>
-      <div class="col-6">
+      </div>
+      <!-- <div class="col-6">
         <div class="form-group">
           <label for="horario">Horario</label>
           <select class="form-control" id="horario" name="horario">
@@ -45,8 +59,8 @@
             <option value="1">1</option>
           </select>
         </div>
-      </div>
-      <div class="col-6">
+      </div> -->
+      <!-- <div class="col-6">
         <div class="form-group">
           <label for="personas">Personas</label>
           <select class="form-control" id="personas" name="personas">
@@ -55,9 +69,9 @@
             <option value="1">1</option>
           </select>
         </div>
-      </div>
+      </div> -->
       <div class="col-12">
-        <button type="button" class="btn fwidth bs btn-primary fwidth center-block onBuscar shadow">Buscar quintas</button>
+        <a class="btn fwidth bs btn-primary fwidth center-block onBuscar shadow cw">Buscar quintas</a>
       </div>
     </div>
     </form>

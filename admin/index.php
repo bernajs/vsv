@@ -56,7 +56,8 @@ isset($_GET['call']) ? $active = $_GET['call'] : $active = '';
         <ul id="main-menu-navigation" data-menu="menu-navigation" class="nav navbar-nav">
         <li class="dropdown nav-item <?php if($active == 'dashboard' || $active == '') echo "active";?>"><a href="index.php" class="nav-link"><i class="ft-home"></i><span>Dashboard</span></a></li>
         <li class="dropdown nav-item <?php if($active == 'caracteristica') echo "active";?>"><a href="index.php?call=caracteristica" class="nav-link"><i class="ft-home"></i><span>Características</span></a></li>
-         <li class="dropdown nav-item <?php if($active == 'categoria') echo "active";?>"><a href="index.php?call=categoria" class="nav-link"><i class="ft-home"></i><span>Categoria</span></a></li>
+        <li class="dropdown nav-item <?php if($active == 'categoria') echo "active";?>"><a href="index.php?call=categoria" class="nav-link"><i class="ft-home"></i><span>Categoria</span></a></li>
+        <li class="dropdown nav-item <?php if($active == 'evento') echo "active";?>"><a href="index.php?call=evento" class="nav-link"><i class="ft-home"></i><span>Eventos</span></a></li>
          <li class="dropdown nav-item <?php if($active == 'promocion') echo "active";?>"><a href="index.php?call=promocion" class="nav-link"><i class="ft-home"></i><span>Promociones</span></a></li>
          <li data-menu="dropdown" class="dropdown nav-item"><a href="index.php?call=quinta" data-toggle="dropdown" class="nav-link"><i class="ft-home"></i><span>Quintas</span></a>
            <ul class="dropdown-menu">

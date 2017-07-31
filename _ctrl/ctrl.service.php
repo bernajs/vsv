@@ -1,11 +1,20 @@
 <?php
 session_start();
 require_once('../admin/_class/class.service.php');
+require_once('../admin/_class/class.quinta.php');
 require_once('../_composer/class.notify.php');
 $obj = new Service();
+$Quinta = new Quinta();
 $data = $_POST['data'];
 
 switch($_POST['exec']) {
+  case "buscar":
+  $data['fecha'] = str_replace('/','-',$data['fecha']);
+    $quintas = $Quinta->get_buscar_quintas(date('Y-m-d', strtotime($data['fecha'])), $data['evento'], $data['zona']);
+    if($quintas){$result['status']=202;$result['quintas'] = $quintas;}
+    else{$result['status']=404;}
+    echo json_encode($result);
+  break;
     case "get_servicios_by_categoria":
         $servicios = $obj->get_servicios_by_categoria($data);
         $servicios_result = array();
@@ -39,6 +48,14 @@ switch($_POST['exec']) {
       set_status(1)->
       set_created_at(date('Y-m-d H:i:s'))->
       set_fecha($data['fecha'])->db('reservar');
+
+      // Actualizar estado de las reservaciones una fecha de la Quinta
+      $estado = $Quinta->get_estado_fecha($data['id_quinta'], $data['fecha']);
+      if(!$estado) $Quinta->set_id_quinta($data['id_quinta'])->set_status(1)->set_fecha($data['fecha'])->db('crear_registro_reservacion');
+      $horarios = $Quinta->get_horarios($data['id_quinta']);
+      $reservaciones = $Quinta->get_reservaciones($data['id_quinta'], $data['fecha']);
+      if(count($horarios) > count($reservaciones)) {$Quinta->set_id($data['id_quinta'])->set_status(1)->set_fecha($data['fecha'])->db('actualizar_reservaciones');}
+      else{$Quinta->set_id($data['id_quinta'])->set_status(0)->set_fecha($data['fecha'])->db('actualizar_reservaciones');}
       $result['status']=202;
       echo json_encode($result);
     break;

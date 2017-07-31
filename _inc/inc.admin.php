@@ -32,3 +32,5 @@ function calculate_time_span($date){
 
         return $time;
 }
+
+$status = array('0'=>'Inactivo' ,'1'=>'Activo');

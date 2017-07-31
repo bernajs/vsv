@@ -31,6 +31,7 @@ if (isset($_GET['call'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.6/sweetalert2.css" />
     <!-- swiper -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
+    <link rel="stylesheet" href="css/datepicker.css">
     <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
@@ -207,6 +208,8 @@ if (isset($_GET['call'])) {
       </div>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.6/sweetalert2.js"></script>
+    <script src="js/plugins/datepicker.js" charset="utf-8"></script>
+    <script src="js/plugins/datepicker.es-ES.js" charset="utf-8"></script>
     <script src="js/app.js" charset="utf-8"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -217,6 +220,7 @@ $(document).ready(function(){
     $('.clima-div').hide('slow');
   })
   moment.locale('es');
+  $('[data-toggle="datepicker"]').datepicker({language: 'es-ES'});
 })
 </script>
   </body>

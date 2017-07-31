@@ -1,26 +1,26 @@
 <?php
-    require_once('_class/class.evento.php');
-    $Evento = new Evento();
-    $eventos = $Evento->get_data();
+    require_once('_class/class.zona.php');
+    $Zona = new Zona();
+    $zonas = $Zona->get_data();
     $tbody='';
-    if($eventos){
-      foreach ($eventos as $evento) {
-        $id = $evento['id'];
+    if($zonas){
+      foreach ($zonas as $zona) {
+        $id = $zona['id'];
         $tbody .= '<tr class="'.$id.'">';
-        $tbody .= '<td>'.$evento['nombre'].'</td>';
-        $tbody .= '<td>'.$status[$evento['status']].'</td>';
+        $tbody .= '<td>'.$zona['nombre'].'</td>';
+        $tbody .= '<td>'.$status[$zona['status']].'</td>';
         $tbody .= '<td class="acciones">
-        <a href="javascript:void(0)" class="onDelete" data-id="'.$id.'" data-src="evento"><i class="ft-trash-2"></i></a>
-        <a class="onEdit onModal" href="views/form.evento.php?id='.$id.'"><i class="ft-edit"></i></a></td>';
+        <a href="javascript:void(0)" class="onDelete" data-id="'.$id.'" data-src="zona"><i class="ft-trash-2"></i></a>
+        <a class="onEdit onModal" href="views/form.zona.php?id='.$id.'"><i class="ft-edit"></i></a></td>';
       }
     }
 ?>
 
 <div class="card">
   <div class="card-header">
-    <h4 class="card-title">Evento</h4>
+    <h4 class="card-title">Zona</h4>
     <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
-    <a href="views/form.evento.php" class="btn btn-outline-primary block btn-lg onModal btn-add">Agregar evento</a>
+    <a href="views/form.zona.php" class="btn btn-outline-primary block btn-lg onModal btn-add">Agregar zona</a>
   </div>
   <div class="card-body collapse in">
     <div class="card-block">

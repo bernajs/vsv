@@ -13,6 +13,7 @@ Cliente = {
         var _self = this;
         $(document).on("click", "a.onFbLogin", function (e) {_self.fb_login(e);});
         $(document).on("click", "a.onLogin", function (e) {_self.login(e);});
+        $(document).on("click", "a.onBuscar", function (e) {_self.buscar(e);});
         $(document).on("click", "a.addFavorito", function (e) {_self.add_favorito(e);});
         $(document).on("click", "a.delFavorito", function (e) {_self.del_favorito(e);});
         $(document).on("click", "a.onLoginQuinta", function (e) {_self.login_quinta(e);});
@@ -30,7 +31,7 @@ Cliente = {
     asociarme: function () {
         var _self = this;
         var info = DAO.toObject($("#frmRegistro").serializeArray());
-        if (!_self.validate("#frmRegistro")) {swal('Error', 'Por favor llena los campos marcados'); return;}
+        if (!_self.validate("#frmRegistro")) {swal('', 'Por favor llena los campos marcados', 'error'); return;}
         // if(!info.terminos){swal('l', 'Por favor acepta los términos y condiciones'); return;}
         DAO.execute("../_ctrl/ctrl.usuario.php", {
                 exec: "asociarme",
@@ -49,7 +50,7 @@ Cliente = {
     registro: function () {
         var _self = this;
         var info = DAO.toObject($("#frmRegistro").serializeArray());
-        if (!_self.validate("#frmRegistro")) {swal('Error', 'Por favor llena los campos marcados'); return;}
+        if (!_self.validate("#frmRegistro")) {swal('', 'Por favor llena los campos marcados', 'error'); return;}
         // if(!info.terminos){swal('l', 'Por favor acepta los términos y condiciones'); return;}
         DAO.execute("_ctrl/ctrl.usuario.php", {
                 exec: "asociarme",
@@ -67,10 +68,25 @@ Cliente = {
                 }
             });
     },
+    buscar: function () {
+        var _self = this;
+        var info = DAO.toObject($("#frmBuscar").serializeArray());
+        if (!_self.validate("#frmBuscar")) {swal('', 'Por favor llena los campos marcados', 'error'); return;}
+        DAO.execute("_ctrl/ctrl.service.php", {
+                exec: "buscar",
+                data: info
+            }, function (r) {
+                if (r.status == 202) {
+                  console.log(r);
+                } else if (r.status == 404) {
+                    swal("Ya hay una cuenta registrada con el correo ingresado.");
+                }
+            });
+    },
     reservar: function () {
         var _self = this;
         var info = DAO.toObject($("#frmReservar").serializeArray());
-        if (!_self.validate("#frmReservar")) {swal('Error', 'Por favor llena los campos marcados'); return;}
+        if (!_self.validate("#frmReservar")) {swal('', 'Por favor llena los campos marcados', 'error'); return;}
         if (!isValidEmail(info.correo)) {swal('Error','Por favor ingresa un email válido.');return;}
         DAO.execute("_ctrl/ctrl.service.php", {
                 exec: "reservar",
@@ -130,7 +146,7 @@ Cliente = {
     login: function () {
         var _self = this;
         var info = DAO.toObject($("#frmLogin").serializeArray());
-        if (!_self.validate("#frmLogin")) {swal('error', 'Por favor llena los campos marcados');return false;};
+        if (!_self.validate("#frmLogin")) {swal('', 'Por favor llena los campos marcados','error');return false;};
         DAO.execute("_ctrl/ctrl.usuario.php", {
             exec: "login",
             data: info
