@@ -77,9 +77,20 @@ Cliente = {
                 data: info
             }, function (r) {
                 if (r.status == 202) {
-                  console.log(r);
+                  var data = r.data;
+                  var buffer = '';
+                  data.forEach(function(element){
+                    buffer+=html_quinta(element);
+                  });
+                  $('.list').html(buffer);
+                  var options = {valueNames: [ 'nombre', 'precio', 'calificacion' ], page: 3,pagination: true};
+                  var quintaList = new List('quintas', options);
+                  // quintaList.sort('nombre', { order: "asc" });
+                  quintaList.sort('precio', { order: "asc" });
+                  // quintaList.sort('nombre', { order: "asc" });
+                  $('.pagination li').addClass('page-item');
                 } else if (r.status == 404) {
-                    swal("Ya hay una cuenta registrada con el correo ingresado.");
+                    swal("No se encontró ninguna Quinta con la información seleccionado.");
                 }
             });
     },
@@ -94,12 +105,7 @@ Cliente = {
             }, function (r) {
                 if (r.status == 202) {
                     swal("Felicidades, tu reservacion se ha generado con éxito.");
-                    // swal({title: "",text: "Felicidades, tu reservacion se ha generado con éxito.",type: "success",confirmButtonColor: "#a0d758",confirmButtonText: "Ok"},
-                    // function(isConfirm){if (isConfirm) {location.href = 'index.php';}});
-                    // swal({title: "",text: "Felicidades, tu reservacion se ha generado con éxito.",type: "success",confirmButtonText: "Aceptar",confirmButtonColor: "#2C8BEB"},
-                    // function(isConfirm) {if (isConfirm) {window.location.href = 'index.php?call=perfil';}
                     setTimeout(function(){location.href = "index.php?call=perfil";}, 1000);
-                  // });
                 } else {
                     swal("Ocurrió un error, por favor vuelvea intentarlo.");
                 }
@@ -333,3 +339,54 @@ DAO = {
         });
     }
 };
+
+function calificacion(calificacion){
+  var buffer = '';
+  var activo;
+  for (var i = 1; i <= calificacion; i++) {
+    calificacion >= i ? activo = 'cp' : activo = 'cg';
+    buffer += '<i class="fa fa-star '+activo+'" aria-hidden="true"></i>';
+    }
+    return buffer;
+  }
+  function sort(a, b) {
+  if (Math.abs(b.values().name.localeCompare(a.values().name)) == 1) {
+    return b.values().name.localeCompare(a.values().name)
+  } else {
+    return a.values().born - b.values().born;
+  }
+}
+function format_precio(precio){return Number(precio).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');}
+function html_quinta(element){
+  return `<li><div class="row quinta py-2 py-md-0 animated fadeIn">
+    <div class="col-12 col-md-5 pl-md-0 image">
+      <div class="card mb-md-0">
+        <!-- <img class="card-img-top" src="" alt="Card image cap"> -->
+        <div class="card-block">
+          <h4 class="card-title nombre">`+element.quinta.nombre+`</h4>
+          <span class="calificacion">`+calificacion(element.quinta.calificacion)+`</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-7 py-4 quinta-descripcion">
+      <div class="row">
+        <div class="col-12">
+          <span class="float-right">Comentarios: `+element.comentarios+`</span>
+          <h4 class="precio">$`+format_precio(element.quinta.menor_precio)+`</h4>
+          <p class="my-4 descripcion">`+element.quinta.descripcion+`</p>
+          <div class="row">
+            <div class="col-4">
+              <i class="fa fa-star-o" aria-hidden="true"></i>
+              <i class="fa fa-star-o" aria-hidden="true"></i>
+              <i class="fa fa-star-o" aria-hidden="true"></i>
+              <i class="fa fa-star-o" aria-hidden="true"></i>
+            </div>
+            <div class="col-6 offset-2">
+              <a href="index.php?call=quinta&id=`+element.quinta.id_quinta+`" class="btn btn-primary fwidth shadow bs cw">Ver más</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div></li>`;
+}

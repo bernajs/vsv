@@ -210,6 +210,8 @@ if (isset($_GET['call'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.6/sweetalert2.js"></script>
     <script src="js/plugins/datepicker.js" charset="utf-8"></script>
     <script src="js/plugins/datepicker.es-ES.js" charset="utf-8"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/list.pagination.js/0.1.1/list.pagination.min.js"></script>
     <script src="js/app.js" charset="utf-8"></script>
 <script type="text/javascript">
 $(document).ready(function(){

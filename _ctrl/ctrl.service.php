@@ -9,9 +9,17 @@ $data = $_POST['data'];
 
 switch($_POST['exec']) {
   case "buscar":
-  $data['fecha'] = str_replace('/','-',$data['fecha']);
+    $data['fecha'] = str_replace('/','-',$data['fecha']);
+    $quintas_result = array();
     $quintas = $Quinta->get_buscar_quintas(date('Y-m-d', strtotime($data['fecha'])), $data['evento'], $data['zona']);
-    if($quintas){$result['status']=202;$result['quintas'] = $quintas;}
+    if($quintas){
+      foreach ($quintas as $key => $quinta) {
+        if(isset($quinta['status'])) if($quinta['status'] == 0) continue;
+        $comentarios = $Quinta->get_comentarios($quinta['id_quinta']);
+        array_push($quintas_result, array('quinta'=>$quinta, 'comentarios' => count($comentarios)));
+      }
+      $result['status']=202;$result['data'] = $quintas_result;
+    }
     else{$result['status']=404;}
     echo json_encode($result);
   break;

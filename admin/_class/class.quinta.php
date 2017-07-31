@@ -179,12 +179,21 @@ public function get_caracteristicas(){
   return $this->execute($query);
 }
 
+public function get_zonas(){
+  $query = 'SELECT * FROM zona WHERE status = 1';
+  return $this->execute($query);
+}
+
 public function get_buscar_quintas($fecha, $evento, $zona){
-  $query = 'SELECT * FROM quinta
+  $query = 'SELECT quinta_reservacion.status, quinta.nombre,quinta.menor_precio, quinta.fotos, quinta.id AS id_quinta, quinta.descripcion, quinta.calificacion FROM quinta
   INNER JOIN quinta_evento ON quinta.id = quinta_evento.id_quinta AND quinta_evento.id_evento = '.$evento.'
   LEFT JOIN quinta_reservacion ON quinta.id = quinta_reservacion.id_quinta AND quinta_reservacion.fecha ="'.$fecha.'"
-  WHERE quinta_reservacion.status=1 AND quinta.zona = '.$zona;
-  echo $query;
+  WHERE quinta.zona = '.$zona;
+  return $this->execute($query);
+}
+
+public function get_comentarios($id){
+  $query = 'SELECT * FROM reservacion WHERE comentarios <> "" AND id_quinta='.$id;
   return $this->execute($query);
 }
 

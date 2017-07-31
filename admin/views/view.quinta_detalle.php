@@ -48,6 +48,12 @@ if(isset($_GET['id'])){
 
 
   // caracteristicas
+  $zonas = $Quinta->get_zonas();
+  if($zonas){foreach ($zonas as $key => $zona) {
+    if($data['zona'] == $zona['id']) $selected = 'selected';
+    $buffer_zonas .= '<option value="'.$zona['id'].'" '.$selected.'>'.$zona['nombre'].'</option>';
+  }}
+
   $caracteristicas = $Quinta->get_caracteristicas();
   $qcaracteristicas = $Quinta->get_caracteristicas_quinta($id);
   $lista_caracteristicas = '';
@@ -209,7 +215,9 @@ if(isset($_GET['id'])){
                   </div>
                   <div class="form-group col-6">
                     <label for="zona">Zona</label>
-                    <input type="text" id="zona" name="zona" class="form-control isRequired" value="<?php echo $data['zona']; ?>">
+                    <select id="zona" name="zona" class="form-control isRequired">
+                      <?php echo $buffer_zonas; ?>
+                    </select>
                   </div>
                   <div class="form-group col-6">
                     <label for="ciudad">Ciudad</label>
