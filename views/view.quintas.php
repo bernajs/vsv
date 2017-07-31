@@ -164,11 +164,11 @@ if($zonas){foreach ($zonas as $key => $zona) {
         <div class="col-md-3 col-12 offset-md-3 mt-md-0 mt-2 form-inline">
           <div class="form-group">
             <!-- <label for="evento">Ordenar por: </label> -->
-            <select class="form-control form-control-sm" id="evento" name="evento">
+            <select class="form-control form-control-sm" id="ordenar" name="ordenar">
               <option value="">Ordenar por: </option>
-              <option>Calificación</option>
-              <option class="sort" data-sort="nombre">Nombre</option>
-              <option class="sort" data-sort="precio">Precio</option>
+              <option value="calificacion" class="sort" data-sort="nombre">Calificación</option>
+              <option value="nombre" class="sort" data-sort="nombre">Nombre</option>
+              <option value="precio" class="sort" data-sort="precio">Precio</option>
             </select>
           </div>
         </div>
@@ -296,6 +296,11 @@ if($zonas){foreach ($zonas as $key => $zona) {
       $('.show-quintas').click(function() {
         $('.quintas-mapa').hide('slow');
         $('.quintas').show('slow');
+      })
+
+      $('#ordenar').change(function(){
+        var name = $(this).val();
+        quintaList.sort(name, { order: "asc" });
       })
     })
   </script>

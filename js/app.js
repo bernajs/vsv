@@ -1,5 +1,6 @@
 /* USER */
 var Cliente;
+var quintaList;
 
 Cliente = {
     init: function () {
@@ -83,10 +84,10 @@ Cliente = {
                     buffer+=html_quinta(element);
                   });
                   $('.list').html(buffer);
+                  $('.list').append(buffer);
                   var options = {valueNames: [ 'nombre', 'precio', 'calificacion' ], page: 3,pagination: true};
-                  var quintaList = new List('quintas', options);
+                  quintaList = new List('quintas', options);
                   // quintaList.sort('nombre', { order: "asc" });
-                  quintaList.sort('precio', { order: "asc" });
                   // quintaList.sort('nombre', { order: "asc" });
                   $('.pagination li').addClass('page-item');
                 } else if (r.status == 404) {
