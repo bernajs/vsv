@@ -19,7 +19,7 @@ if($uid){
                     <td>'.date('d-m-Y',strtotime($reservacion['created_at'])).'</td>
                     <td>'.date('d-m-Y',strtotime($reservacion['fecha'])).'</td>
                     <td>'.date('H:m', $reservacion['inicio']).' a '.date('H:m', $reservacion['fin']).'</td>
-                    <td>Aprobado</td>
+                    <td>'.number_format($reservacion['total'],2).'</td>
                     <td class="pagado">Aprobado</td>
                 </tr>';
   }}else{$buffer_reservaciones = '<h6>Aún no ha hecho ninguna reservación</h6>';}

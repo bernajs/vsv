@@ -97,7 +97,7 @@ public function get_favoritos($uid, $id){
 }
 
 public function get_reservaciones($id){
-  $query = 'SELECT reservacion.id, quinta.nombre, reservacion.id, reservacion.created_at, reservacion.fecha, horario.inicio, horario.fin FROM reservacion
+  $query = 'SELECT reservacion.id, quinta.nombre,reservacion.total, reservacion.id, reservacion.created_at, reservacion.fecha, horario.inicio, horario.fin FROM reservacion
   INNER JOIN quinta ON quinta.id = reservacion.id_quinta INNER JOIN horario ON horario.id = reservacion.id_horario
   WHERE reservacion.id_usuario = '.$id;
   return $this->execute($query);

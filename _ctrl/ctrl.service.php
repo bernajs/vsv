@@ -53,6 +53,7 @@ switch($_POST['exec']) {
       $obj->set_id_usuario($data['id_usuario'])->
       set_id_quinta($data['id_quinta'])->
       set_id_horario($data['id_horario'])->
+      set_precio($data['precio'])->
       set_status(1)->
       set_created_at(date('Y-m-d H:i:s'))->
       set_fecha($data['fecha'])->db('reservar');

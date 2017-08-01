@@ -26,6 +26,7 @@ class Service extends Helper {
     var $id_quinta;
     var $id_horario;
     var $fecha;
+    var $precio;
 
     public function __construct(){ $this->sql = new db(); }
 
@@ -54,12 +55,13 @@ class Service extends Helper {
                 )";
                 break;
                 case "reservar":
-                    $query = "INSERT INTO reservacion (id_usuario,id_quinta,id_horario,fecha,estatus,created_at)
+                    $query = "INSERT INTO reservacion (id_usuario,id_quinta,id_horario,fecha,total,estatus,created_at)
                     VALUES (
                     '".$this->id_usuario."',
                     '".$this->id_quinta."',
                     '".$this->id_horario."',
                     '".$this->fecha."',
+                    '".$this->precio."',
                     '".$this->status."',
                     '".$this->created_at."'
                     )";

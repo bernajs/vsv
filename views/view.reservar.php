@@ -2,7 +2,7 @@
  $horarios = $Service->get_horarios($id);
  if($horarios){
    foreach ($horarios as $key => $horario) {
-     $buffer_horarios .= '<div class="col-12 horario mt-4 horario-'.$horario['id'].'" data-id="'.$horario['id'].'">
+     $buffer_horarios .= '<div class="col-12 horario mt-4 horario-'.$horario['id'].'" data-id="'.$horario['id'].'" data-precio="'.$horario['precio'].'">
                    <h6 class="mb-0">'.$horario['nombre'].'</h6>
                    Entre un horario de: <span class="horario_detalle">'.date('H:i', strtotime($horario['inicio'])).' a '.date('H:i', strtotime($horario['fin'])).'</span>
                    <span class="status"></span>
@@ -195,7 +195,7 @@
           <hr>
         </div>
         <div class="col-12 detalles-pago-total text-center">
-          <span class="text-center">Total: </span> <span class="float-right label-precio"><b>$5,000.00</b></span>
+          <span class="text-center">Total: </span> <span class="float-right label-precio"><b class="precio">$5,000.00</b></span>
           <hr>
         </div>
       </div>
@@ -204,7 +204,7 @@
       <div class="row">
         <div class="col-12">
           <span>Total a pagar:</span>
-          <h3 class="total-pagar pt-2">$5,000.00</h3>
+          <h3 class="total-pagar pt-2 precio">$5,000.00</h3>
       </div>
       <div class="col-12 mt-2">
         <form id="frmReservar">
@@ -235,6 +235,7 @@
             </div>
             <input type="hidden" name="id_horario" id="id_horario" value="">
             <input type="hidden" name="fecha" id="fecha" value="">
+            <input type="hidden" name="precio" id="precio" value="">
             <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $uid; ?>">
             <input type="hidden" name="id_quinta" id="id_quinta" value="<?php echo $id; ?>">
             <div class="col-12 form-group">
@@ -360,12 +361,15 @@ Cliente.get_reservaciones(id, fecha);
       if($(this).children('.status').hasClass('reservado')){alert('Este horario ya está ocupado');return;}
       $('.status').removeClass('selected');
       var id_horario = $(this).data('id');
+      var precio = $(this).data('precio');
       var horario = $(this).children('.horario_detalle').text();
       $(this).children('.status').addClass('selected');
       $('#fecha').val(fecha);
+      $('.precio').html(format_precio(precio));
       $('.label-horario').html(horario);
       $('.label-fecha').html(moment(fecha).format('DD/MMM/YYYY'));
       $('#id_horario').val(id_horario);
+      $('#precio').val(precio);
     })
 
     var reservacion = $('.reservacion');

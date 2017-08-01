@@ -2,6 +2,10 @@
 var Cliente;
 var quintaList;
 var quintas;
+var map;
+var mapMovil;
+var markers = [];
+var pos;
 
 Cliente = {
     init: function () {
@@ -80,6 +84,7 @@ Cliente = {
             }, function (r) {
                 if (r.status == 202) {
                   var data = r.data;
+                  initMarkers(data)
                   var buffer = '';
                   quintas = data;
                   data.forEach(function(element){
@@ -395,3 +400,21 @@ function html_quinta(element){
     </div>
   </div></li>`;
 }
+
+
+  function initMarkers(quintas) {
+      var position;
+      markers.forEach(function(element){element.setMap(null)})
+      quintas.forEach(function(element){
+        position = JSON.parse((element.quinta.coordenadas));
+      var marker = new google.maps.Marker({
+        position: position,
+        map: mapMovil
+      });
+      var marker = new google.maps.Marker({
+        position: position,
+        map: map
+      });
+      markers.push(marker);
+  })
+  }

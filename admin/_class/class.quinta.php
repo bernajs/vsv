@@ -185,7 +185,7 @@ public function get_zonas(){
 }
 
 public function get_buscar_quintas($fecha, $evento, $zona){
-  $query = 'SELECT quinta_reservacion.status, quinta.nombre,quinta.menor_precio, quinta.fotos, quinta.id AS id_quinta, quinta.descripcion, quinta.calificacion FROM quinta
+  $query = 'SELECT quinta_reservacion.status, quinta.coordenadas, quinta.nombre,quinta.menor_precio, quinta.fotos, quinta.id AS id_quinta, quinta.descripcion, quinta.calificacion FROM quinta
   INNER JOIN quinta_evento ON quinta.id = quinta_evento.id_quinta AND quinta_evento.id_evento = '.$evento.'
   LEFT JOIN quinta_reservacion ON quinta.id = quinta_reservacion.id_quinta AND quinta_reservacion.fecha ="'.$fecha.'"
   WHERE quinta.zona = '.$zona;
