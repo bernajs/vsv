@@ -346,12 +346,6 @@ if($zonas){foreach ($zonas as $key => $zona) {
         quintaList.sort(name, { order: "asc" });
       })
 
-      $(document).on('click','.ver',function(){
-        var id = $(this).data('id');
-        var fecha = $('#fecha').val();
-        location.href = 'index.php?call=quinta&id='+id+'&fecha='+fecha;
-    })
-
     $('#ex2').change(function(){
       console.log($(this).val());
     })
@@ -394,19 +388,9 @@ if($zonas){foreach ($zonas as $key => $zona) {
     });
   }
 
-      // var marker = new google.maps.Marker({
-      //   position: quinta,
-      //   map: mapMovil
-      // });
-      //
-      // var marker = new google.maps.Marker({
-      //   position: quinta,
-      //   map: map
-      // });
     }
 
-// $(document).ready(function(){
 
-  // })
+
 
   </script>

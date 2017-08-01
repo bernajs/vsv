@@ -403,18 +403,34 @@ function html_quinta(element){
 
 
   function initMarkers(quintas) {
+      console.log(quintas);
       var position;
       markers.forEach(function(element){element.setMap(null)})
       quintas.forEach(function(element){
         position = JSON.parse((element.quinta.coordenadas));
       var marker = new google.maps.Marker({
         position: position,
-        map: mapMovil
+        map: mapMovil,
+        url: element.quinta.id_quinta,
+        title: element.quinta.nombre,
       });
       var marker = new google.maps.Marker({
         position: position,
-        map: map
+        map: map,
+        url: element.quinta.id_quinta,
+        title: element.quinta.nombre,
       });
-      markers.push(marker);
+
+      google.maps.event.addListener(marker, 'click', function() {
+          redirect(this.url);
+      });
   })
   }
+  function redirect(id){
+    var fecha = $('#fecha').val();
+    location.href = 'index.php?call=quinta&id='+id+'&fecha='+fecha;
+  }
+  $(document).on('click','.ver',function(){
+    var id = $(this).data('id');
+    redirect(id);
+})
