@@ -6,6 +6,7 @@ var map;
 var mapMovil;
 var markers = [];
 var pos;
+var filtro_quintas;
 
 Cliente = {
     init: function () {
@@ -87,10 +88,12 @@ Cliente = {
                   initMarkers(data)
                   var buffer = '';
                   quintas = data;
-                  data.forEach(function(element){
-                    buffer+=html_quinta(element);
-                  });
-                  $('.list').html(buffer);
+                  filtro_quintas = data;
+                  render_quintas(data);
+                  // data.forEach(function(element){
+                  //   buffer+=html_quinta(element);
+                  // });
+                  // $('.list').html(buffer);
                   var options = {valueNames: [ 'nombre', 'precio', 'calificacion' ], page: 3,pagination: true};
                   quintaList = new List('quintas', options);
                   // quintaList.sort('nombre', { order: "asc" });
@@ -367,8 +370,10 @@ function calificacion(calificacion){
   }
 }
 function format_precio(precio){return Number(precio).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');}
-function html_quinta(element){
-  return `<li><div class="row quinta py-2 py-md-0 animated fadeIn">
+function render_quintas(quintas){
+  var buffer = '';
+quintas.forEach(function(element){
+  buffer+= `<li><div class="row quinta py-2 py-md-0 animated fadeIn">
     <div class="col-12 col-md-5 pl-md-0 image">
       <div class="card mb-md-0">
         <!-- <img class="card-img-top" src="" alt="Card image cap"> -->
@@ -399,32 +404,36 @@ function html_quinta(element){
       </div>
     </div>
   </div></li>`;
+})
+$('.list').html(buffer);
 }
 
 
   function initMarkers(quintas) {
-      console.log(quintas);
+    setTimeout(function(){
       var position;
       markers.forEach(function(element){element.setMap(null)})
       quintas.forEach(function(element){
         position = JSON.parse((element.quinta.coordenadas));
-      var marker = new google.maps.Marker({
-        position: position,
-        map: mapMovil,
-        url: element.quinta.id_quinta,
-        title: element.quinta.nombre,
-      });
-      var marker = new google.maps.Marker({
-        position: position,
-        map: map,
-        url: element.quinta.id_quinta,
-        title: element.quinta.nombre,
-      });
+        var marker = new google.maps.Marker({
+          position: position,
+          map: mapMovil,
+          url: element.quinta.id_quinta,
+          title: element.quinta.nombre,
+        });
+        var marker = new google.maps.Marker({
+          position: position,
+          map: map,
+          url: element.quinta.id_quinta,
+          title: element.quinta.nombre,
+        });
+        markers.push(marker);
 
-      google.maps.event.addListener(marker, 'click', function() {
+        google.maps.event.addListener(marker, 'click', function() {
           redirect(this.url);
-      });
-  })
+        });
+      })
+    },500);
   }
   function redirect(id){
     var fecha = $('#fecha').val();
@@ -433,4 +442,27 @@ function html_quinta(element){
   $(document).on('click','.ver',function(){
     var id = $(this).data('id');
     redirect(id);
+  })
+
+
+  $('input[name=servicio]').click(function(){
+    $('input[name=servicio]:checked').each(function(){
+      var val = $(this).val();
+      console.log(val);
+      filtro_quintas = _.filter(filtro_quintas,function(q){return q.caracteristicas.includes(val)});
+      console.log(filtro_quintas);
+    })
+    render_quintas(filtro_quintas);
+  })
+
+$('#ex2').change(function(){
+  console.log(quintas);
+  var values = $(this).val().split(',');
+  var menor = (values[0]);
+  var mayor = (values[1]);
+  console.log(menor);
+  console.log(mayor);
+  filtro_quintas = _.filter(quintas,function(q){return (Number(q.quinta.menor_precio) > menor && Number(q.quinta.mayor_precio) < mayor) })
+  render_quintas(filtro_quintas);
+  initMarkers(filtro_quintas);
 })

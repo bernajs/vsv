@@ -11,12 +11,16 @@ switch($_POST['exec']) {
   case "buscar":
     $data['fecha'] = str_replace('/','-',$data['fecha']);
     $quintas_result = array();
+    $caracteristica_quinta = array();
     $quintas = $Quinta->get_buscar_quintas(date('Y-m-d', strtotime($data['fecha'])), $data['evento'], $data['zona']);
     if($quintas){
       foreach ($quintas as $key => $quinta) {
         if(isset($quinta['status'])) if($quinta['status'] == 0) continue;
         $comentarios = $Quinta->get_comentarios($quinta['id_quinta']);
-        array_push($quintas_result, array('quinta'=>$quinta, 'comentarios' => count($comentarios)));
+        $caracteristicas = $Quinta->get_servicios_quinta($quinta['id_quinta']);
+        foreach ($caracteristicas as $key => $caracteristica) {array_push($caracteristica_quinta, $caracteristica['id_caracteristica']);}
+        array_push($quintas_result, array('quinta'=>$quinta, 'comentarios' => count($comentarios), 'caracteristicas' => ($caracteristica_quinta)));
+        $caracteristica_quinta = [];
       }
       $result['status']=202;$result['data'] = $quintas_result;
     }

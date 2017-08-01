@@ -8,19 +8,20 @@ $Zona = new Zona();
 
 if(isset($_GET['evento'])) $id_evento = $_GET['evento'];
 if(isset($_GET['zona'])) $id_zona = $_GET['zona'];
+if(isset($_GET['fecha'])) $fecha = $_GET['fecha'];
 
 $eventos = $Evento->set_status(1)->get_data();
 if($eventos){foreach ($eventos as $key => $evento) {
-    $selected = '';
-    if($id_evento = $evento['id']) $selected = 'selected';
+    if($id_evento == $evento['id']) {$selected = 'selected';}
     $buffer_eventos .= '<option value="'.$evento['id'].'" '.$selected.'>'.$evento['nombre'].'</option>';
+    $selected = '';
 }}
 
 $zonas = $Zona->set_status(1)->get_data();
 if($zonas){foreach ($zonas as $key => $zona) {
-    $selected = '';
-    if($id_zona = $zona['id']) $selected = 'selected';
+    if($id_zona == $zona['id']) {$selected = 'selected';}
     $buffer_zonas .= '<option value="'.$zona['id'].'" '.$selected.'>'.$zona['nombre'].'</option>';
+    $selected = '';
 }}
 ?>
 <button type="button" name="button" class="hidden-sm-down btn btn-secondary show-quintas btn-show-quintas opacity-0">Mostrar listado</button>
@@ -60,7 +61,7 @@ if($zonas){foreach ($zonas as $key => $zona) {
                   <label>Fecha</label>
                   <div class="input-group">
                     <span class="input-group-addon" id="basic-addon1"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-                    <input type="datetime" id="fecha" name="fecha" data-toggle="datepicker" value="" class="form-control isRequired" aria-describedby="basic-addon1">
+                    <input type="datetime" id="fecha" name="fecha" data-toggle="datepicker" value="<?php echo $fecha; ?>" class="form-control isRequired" aria-describedby="basic-addon1">
                   </div>
                 </div>
               </div>
@@ -144,27 +145,27 @@ if($zonas){foreach ($zonas as $key => $zona) {
           <h4>Buscar por servicios</h4>
           <div class="form-check">
             <label class="form-check-label">
-              <input type="checkbox" id="servicio" name="calificacion" group="calificacion" value="5"> Servicio 1
+              <input type="checkbox" id="servicio" name="servicio" group="servicio" value="8"> Servicio 1
             </label>
           </div>
           <div class="form-check">
             <label class="form-check-label">
-              <input type="checkbox" id="servicio" name="calificacion" group="calificacion" value="5"> Servicio 2
+              <input type="checkbox" id="servicio" name="servicio" group="servicio" value="9"> Servicio 2
             </label>
           </div>
           <div class="form-check">
             <label class="form-check-label">
-              <input type="checkbox" id="servicio" name="calificacion" group="calificacion" value="5"> Servicio 3
+              <input type="checkbox" id="servicio" name="servicio" group="servicio" value="10"> Servicio 3
             </label>
           </div>
           <div class="form-check">
             <label class="form-check-label">
-              <input type="checkbox" id="servicio" name="calificacion" group="calificacion" value="5"> Servicio 4
+              <input type="checkbox" id="servicio" name="servicio" group="servicio" value="11"> Servicio 4
             </label>
           </div>
           <div class="form-check">
             <label class="form-check-label">
-              <input type="checkbox" id="servicio" name="calificacion" group="calificacion" value="5"> Servicio 5
+              <input type="checkbox" id="servicio" name="servicio" group="servicio" value="5"> Servicio 5
             </label>
           </div>
         </div>
@@ -346,17 +347,22 @@ if($zonas){foreach ($zonas as $key => $zona) {
         quintaList.sort(name, { order: "asc" });
       })
 
-    $('#ex2').change(function(){
-      console.log($(this).val());
-    })
+    // $('#ex2').change(function(){
+    //   console.log($(this).val());
+    // })
+    //
+    // $('input[name="radio"]').click(function(){
+    // })
 
-    $('input[name="radio"]').click(function(){
-    })
+    <?php if($id_evento&&$id_zona&&$fecha):?>
+    Cliente.buscar();
+    <?php endif ?>
     })
   </script>
 
   <script>
     function initMap() {
+
       // var quinta = <?php echo ($quinta['coordenadas']); ?>;
       var quinta;
       if (navigator.geolocation) {
@@ -387,10 +393,5 @@ if($zonas){foreach ($zonas as $key => $zona) {
       handleLocationError(true, infoWindow, map.getCenter());
     });
   }
-
     }
-
-
-
-
   </script>

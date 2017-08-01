@@ -1,3 +1,8 @@
+<?php
+  include_once('../admin/_class/class.usuario.php');
+  $Usuario = new Usuario();
+  
+ ?>
 <div class="row">
   <div class="col-12 mb-4 cw">
     <div class="row justify-content-between">

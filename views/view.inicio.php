@@ -1,4 +1,24 @@
 <?php
+include_once('admin/_class/class.quinta.php');
+include_once('admin/_class/class.evento.php');
+include_once('admin/_class/class.zona.php');
+$Evento = new Evento();
+$Quinta = new Quinta();
+$Zona = new Zona();
+
+$eventos = $Evento->set_status(1)->get_data();
+if($eventos){foreach ($eventos as $key => $evento) {
+    if($id_evento == $evento['id']) {$selected = 'selected';}
+    $buffer_eventos .= '<option value="'.$evento['id'].'" '.$selected.'>'.$evento['nombre'].'</option>';
+    $selected = '';
+}}
+
+$zonas = $Zona->set_status(1)->get_data();
+if($zonas){foreach ($zonas as $key => $zona) {
+    if($id_zona == $zona['id']) {$selected = 'selected';}
+    $buffer_zonas .= '<option value="'.$zona['id'].'" '.$selected.'>'.$zona['nombre'].'</option>';
+    $selected = '';
+}}
 // Quintas destacadas
 $quintas_destacadas = $Service->get_quintas_destacadas();
 $quitnas_destacadas_pr = '';
@@ -72,6 +92,7 @@ $servicios_destacados_pr = '';
 
 <div class="row filtro-fondo">
   <div class="col-12 col-md-3 offset-md-1 col-filtro cw">
+    <form id="frmBuscar">
     <div class="row align-items-center filtro-1 bp">
       <div class="col-12">
         <h2 class="text-center">Encuentra tu quinta</h2>
@@ -80,23 +101,19 @@ $servicios_destacados_pr = '';
         <div class="form-group">
           <label for="evento">Evento</label>
           <select class="form-control" id="evento" name="evento">
-            <option value="">1</option>
-            <option value="">2</option>
-            <option value="">3</option>
+            <?php echo $buffer_eventos; ?>
           </select>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-12">
         <div class="form-group">
-          <label for="municipio">Municipio</label>
-          <select class="form-control" id="municipio" name="municipio">
-            <option value="">1</option>
-            <option value="">2</option>
-            <option value="">3</option>
+          <label for="zona">Zona</label>
+          <select class="form-control" id="zona" name="zona">
+            <?php echo $buffer_zonas; ?>
           </select>
         </div>
       </div>
-      <div class="col-6">
+      <!-- <div class="col-6">
         <div class="form-group">
           <label for="personas">Personas</label>
           <select class="form-control" id="personas" name="personas">
@@ -105,14 +122,14 @@ $servicios_destacados_pr = '';
             <option value="">3</option>
           </select>
         </div>
-      </div>
-      <div class="col-6">
+      </div> -->
+      <div class="col-12">
         <div class="form-group">
           <label for="fecha">Fecha</label>
-          <input type="date" id="fecha" name="fecha" class="form-control">
+          <input type="datatime" id="fecha" name="fecha" data-toggle="datepicker" class="form-control">
       </div>
       </div>
-      <div class="col-6">
+      <!-- <div class="col-6">
         <div class="form-group">
           <label for="horario">Horario</label>
           <select class="form-control" id="horario" name="horario">
@@ -121,11 +138,12 @@ $servicios_destacados_pr = '';
             <option value="">3</option>
           </select>
         </div>
-      </div>
+      </div> -->
       <div class="col-12">
-        <button type="button" class="btn fwidth bs btn-primary fwidth center-block onBuscar shadow">Buscar Quintas</button>
+        <button type="button" class="btn fwidth bs btn-primary fwidth center-block preBuscar shadow">Buscar Quintas</button>
       </div>
     </div>
+  </form>
   </div>
 </div>
 <div class="main-container mt-md-5 mb-md-5 mt-4 mb-4">
@@ -231,6 +249,13 @@ $servicios_destacados_pr = '';
   $('.animated').hover(function(){$(this).addClass('pulse');}, function(){$(this).removeClass('pulse');})
   var swiper = new Swiper('.swiper-container', {
   });
+
+  $('.preBuscar').click(function(){
+    var evento = $('#evento').val();
+    var zona = $('#zona').val();
+    var fecha = $('#fecha').val();
+    location.href ="index.php?call=quintas&zona="+zona+"&evento="+evento+"&fecha="+fecha;
+  })
 
 
   $(document).ready(function () {
