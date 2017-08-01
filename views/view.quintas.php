@@ -6,14 +6,21 @@ $Evento = new Evento();
 $Quinta = new Quinta();
 $Zona = new Zona();
 
+if(isset($_GET['evento'])) $id_evento = $_GET['evento'];
+if(isset($_GET['zona'])) $id_zona = $_GET['zona'];
+
 $eventos = $Evento->set_status(1)->get_data();
 if($eventos){foreach ($eventos as $key => $evento) {
-    $buffer_eventos .= '<option value="'.$evento['id'].'">'.$evento['nombre'].'</option>';
+    $selected = '';
+    if($id_evento = $evento['id']) $selected = 'selected';
+    $buffer_eventos .= '<option value="'.$evento['id'].'" '.$selected.'>'.$evento['nombre'].'</option>';
 }}
 
 $zonas = $Zona->set_status(1)->get_data();
 if($zonas){foreach ($zonas as $key => $zona) {
-    $buffer_zonas .= '<option value="'.$zona['id'].'">'.$zona['nombre'].'</option>';
+    $selected = '';
+    if($id_zona = $zona['id']) $selected = 'selected';
+    $buffer_zonas .= '<option value="'.$zona['id'].'" '.$selected.'>'.$zona['nombre'].'</option>';
 }}
 ?>
 
@@ -86,7 +93,7 @@ if($zonas){foreach ($zonas as $key => $zona) {
           <h4 class="">Buscar por calificación</h4>
           <div class="form-check">
             <label class="form-check-label">
-              <input type="radio" name="calificacion" group="calificacion" value="5">
+              <input type="radio" id="calificacion" name="calificacion" group="calificacion" value="5">
               <i class="fa fa-star-o" aria-hidden="true"></i>
               <i class="fa fa-star-o" aria-hidden="true"></i>
               <i class="fa fa-star-o" aria-hidden="true"></i>
@@ -96,7 +103,7 @@ if($zonas){foreach ($zonas as $key => $zona) {
           </div>
           <div class="form-check">
             <label class="form-check-label">
-              <input type="radio" name="calificacion" group="calificacion" value="5">
+              <input type="radio" id="calificacion" name="calificacion" group="calificacion" value="4">
               <i class="fa fa-star-o" aria-hidden="true"></i>
               <i class="fa fa-star-o" aria-hidden="true"></i>
               <i class="fa fa-star-o" aria-hidden="true"></i>
@@ -105,7 +112,7 @@ if($zonas){foreach ($zonas as $key => $zona) {
           </div>
           <div class="form-check">
             <label class="form-check-label">
-              <input type="radio" name="calificacion" group="calificacion" value="5">
+              <input type="radio" id="calificacion" name="calificacion" group="calificacion" value="3">
               <i class="fa fa-star-o" aria-hidden="true"></i>
               <i class="fa fa-star-o" aria-hidden="true"></i>
               <i class="fa fa-star-o" aria-hidden="true"></i>
@@ -113,14 +120,14 @@ if($zonas){foreach ($zonas as $key => $zona) {
           </div>
           <div class="form-check">
             <label class="form-check-label">
-              <input type="radio" name="calificacion" group="calificacion" value="5">
+              <input type="radio" id="calificacion" name="calificacion" group="calificacion" value="2">
               <i class="fa fa-star-o" aria-hidden="true"></i>
               <i class="fa fa-star-o" aria-hidden="true"></i>
             </label>
           </div>
           <div class="form-check">
             <label class="form-check-label">
-              <input type="radio" name="calificacion" group="calificacion" value="5">
+              <input type="radio" id="calificacion" name="calificacion" group="calificacion" value="1">
               <i class="fa fa-star-o" aria-hidden="true"></i>
             </label>
           </div>
@@ -129,27 +136,27 @@ if($zonas){foreach ($zonas as $key => $zona) {
           <h4>Buscar por servicios</h4>
           <div class="form-check">
             <label class="form-check-label">
-              <input type="checkbox" name="calificacion" group="calificacion" value="5"> Servicio 1
+              <input type="checkbox" id="servicio" name="calificacion" group="calificacion" value="5"> Servicio 1
             </label>
           </div>
           <div class="form-check">
             <label class="form-check-label">
-              <input type="checkbox" name="calificacion" group="calificacion" value="5"> Servicio 2
+              <input type="checkbox" id="servicio" name="calificacion" group="calificacion" value="5"> Servicio 2
             </label>
           </div>
           <div class="form-check">
             <label class="form-check-label">
-              <input type="checkbox" name="calificacion" group="calificacion" value="5"> Servicio 3
+              <input type="checkbox" id="servicio" name="calificacion" group="calificacion" value="5"> Servicio 3
             </label>
           </div>
           <div class="form-check">
             <label class="form-check-label">
-              <input type="checkbox" name="calificacion" group="calificacion" value="5"> Servicio 4
+              <input type="checkbox" id="servicio" name="calificacion" group="calificacion" value="5"> Servicio 4
             </label>
           </div>
           <div class="form-check">
             <label class="form-check-label">
-              <input type="checkbox" name="calificacion" group="calificacion" value="5"> Servicio 5
+              <input type="checkbox" id="servicio" name="calificacion" group="calificacion" value="5"> Servicio 5
             </label>
           </div>
         </div>
@@ -285,7 +292,7 @@ if($zonas){foreach ($zonas as $key => $zona) {
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.min.js"></script>
   <script type="text/javascript">
-    $("#ex2").slider({});
+  $("#ex2").slider({});
   </script>
   <script>
     $(document).ready(function(e) {
@@ -302,5 +309,19 @@ if($zonas){foreach ($zonas as $key => $zona) {
         var name = $(this).val();
         quintaList.sort(name, { order: "asc" });
       })
+
+      $(document).on('click','.ver',function(){
+        var id = $(this).data('id');
+        var fecha = $('#fecha').val();
+        location.href = 'index.php?call=quinta&id='+id+'&fecha='+fecha;
+    })
+
+    $('#ex2').change(function(){
+      console.log($(this).val());
+    })
+
+    $('input[name="radio"]').click(function(){
+      console.log(1);
+    })
     })
   </script>

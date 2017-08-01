@@ -41,8 +41,7 @@ Quinta
 
   Pendiente:
   Actualizar estado de reservaciones cuanod se cancela una o cuando se crea un nuevo horario
-
-
+  
 
   SELECT * FROM quinta INNER JOIN quinta_evento ON quinta.id = quinta_evento.id_quinta AND quinta_evento.id_evento = 2 LEFT JOIN quinta_reservacion ON quinta.id = quinta_reservacion.id_quinta AND quinta_reservacion.fecha ="2017-08-03" WHERE quinta.zona = 'norte'
 

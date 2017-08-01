@@ -316,6 +316,8 @@ var id = <?php echo $id; ?> ;
 var uid = <?php if($uid) echo $uid; else echo 'null'; ?>;
 var fecha = moment().format('YYYY-MM-DD');
 var horario;
+var fechaInit = '<?php if($fecha) echo $fecha;?>';
+!fechaInit ? fechaInit = moment().format('YYYY-MM-DD') : fechaInit = moment(fechaInit).format('YYYY-DD-MM');
 Cliente.get_reservaciones(id, fecha);
  $('#calendar').fullCalendar({
    header: {
@@ -323,6 +325,10 @@ Cliente.get_reservaciones(id, fecha);
     center: 'title',
     right: 'false'
 },
+// defaultDate:moment(fechaInit).format('DD-MM-YYYY'),
+// year: moment(fechaInit).format('YYYY'),
+// month: moment(fechaInit).format('MM'),
+// day: moment(fechaInit).format('DD'),
 /* This constrains it to today or later */
  eventConstraint: {
      start: moment().format('YYYY-MM-DD'),
@@ -347,7 +353,9 @@ Cliente.get_reservaciones(id, fecha);
     }
 }
     })
-
+    // console.log(fechaInit);
+    $('.fc-button-group button').removeClass().addClass('btn btn-secondary');
+// $('#calendar').fullCalendar('gotoDate', fechaInit);
     $('.horario').click(function(e){
       if($(this).children('.status').hasClass('reservado')){alert('Este horario ya está ocupado');return;}
       $('.status').removeClass('selected');

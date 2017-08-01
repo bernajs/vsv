@@ -4,6 +4,7 @@ include_once('admin/_class/class.usuario.php');
 include_once('admin/_class/class.quinta.php');
 $Quinta = new Quinta();
 $Usuario = new Usuario();
+if(isset($_GET['fecha'])) $fecha = $_GET['fecha'];
 if(isset($_GET['id'])){
     $id = $_GET['id'];
     $quinta = $Service->get_quinta($id);
@@ -18,7 +19,7 @@ if(isset($_GET['id'])){
             $quinta_caracteristicas .= '<div class="col-2 text-center center-text">
             <img src="admin/uploads/caracteristica/'.$caracteristica['imagen'].'" style="height:20px;width:20px;border-radius:50px; background-color:lightgray">
             </div>';
-            
+
         }
         $resenas = $Quinta->get_resenas($id);
         if($resenas) {foreach ($resenas as $i=>$resena) {
@@ -148,15 +149,15 @@ if(isset($_GET['id'])){
       border: 1px solid lightgray;
       padding: 10px 0px;
     }
-    
+
     .mapa-quinta {
       background-color: lightgray;
     }
-    
+
     .slider-mapa {
       padding-bottom: 40px;
     }
-    
+
     .fc-header-right {
       display: none !important;
     }
@@ -171,32 +172,32 @@ if(isset($_GET['id'])){
       margin-left: auto;
       margin-right: auto;
     }
-    
+
     .swiper-slide {
       background-size: cover;
       background-position: center;
     }
-    
+
     .gallery-top {
       width: 100%;
     }
-    
+
     .gallery-thumbs {
       height: 20%;
       box-sizing: border-box;
       padding: 10px 0;
     }
-    
+
     .gallery-thumbs .swiper-slide {
       width: 25%;
       height: 100%;
       opacity: 0.4;
     }
-    
+
     .resena {
       cursor: pointer;
     }
-    
+
     .gallery-thumbs .swiper-slide-active {
       opacity: 1;
     }
@@ -246,4 +247,8 @@ if(isset($_GET['id'])){
         map: map
       });
     }
+  </script>
+
+  <script type="text/javascript">
+    
   </script>

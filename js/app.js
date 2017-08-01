@@ -1,6 +1,7 @@
 /* USER */
 var Cliente;
 var quintaList;
+var quintas;
 
 Cliente = {
     init: function () {
@@ -25,7 +26,7 @@ Cliente = {
         $(document).on("click", "a.onQuinta", function (e) {_self.quinta(e);});
         $(document).on("click", "a.onReservar", function (e) {_self.reservar(e);});
         $(document).on("click", "a.onUpdate", function (e) {_self.update(e);});
-        $('.isRequired').keyup(function () {$(this).parent().removeClass('has-danger');});
+        $('.isRequired').change(function () {$(this).parent().removeClass('has-danger');});
         $('.isNumber').keyup(function () { this.value = this.value.replace(/[^0-9\.]/g, ''); });
         // (e.currentTarget.dataset.id);
     },
@@ -80,11 +81,11 @@ Cliente = {
                 if (r.status == 202) {
                   var data = r.data;
                   var buffer = '';
+                  quintas = data;
                   data.forEach(function(element){
                     buffer+=html_quinta(element);
                   });
                   $('.list').html(buffer);
-                  $('.list').append(buffer);
                   var options = {valueNames: [ 'nombre', 'precio', 'calificacion' ], page: 3,pagination: true};
                   quintaList = new List('quintas', options);
                   // quintaList.sort('nombre', { order: "asc" });
@@ -292,6 +293,9 @@ Cliente = {
                 }
             });
     },
+    filtro: function () {
+
+    },
     validate: function (form) {
   		var flag = true;
   		$(form + " .isRequired").each(function (index) {
@@ -365,7 +369,7 @@ function html_quinta(element){
         <!-- <img class="card-img-top" src="" alt="Card image cap"> -->
         <div class="card-block">
           <h4 class="card-title nombre">`+element.quinta.nombre+`</h4>
-          <span class="calificacion">`+calificacion(element.quinta.calificacion)+`</span>
+          <span class="calificacion c`+element.quinta.calificacion+`">`+calificacion(element.quinta.calificacion)+`</span>
         </div>
       </div>
     </div>
@@ -383,7 +387,7 @@ function html_quinta(element){
               <i class="fa fa-star-o" aria-hidden="true"></i>
             </div>
             <div class="col-6 offset-2">
-              <a href="index.php?call=quinta&id=`+element.quinta.id_quinta+`" class="btn btn-primary fwidth shadow bs cw">Ver más</a>
+              <a data-id="`+element.quinta.id_quinta+`" class="btn btn-primary fwidth shadow bs cw ver">Ver más</a>
             </div>
           </div>
         </div>
